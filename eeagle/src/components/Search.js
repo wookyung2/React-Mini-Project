@@ -12,6 +12,10 @@ function Search() {
   );
   const dispatch = useDispatch();
 
+
+  // Submit 핸들함수 
+  // 바로전 키워드와 다르면 Articles를 cleanup하고,
+  // 그 후 keywordUpdate, fetchArticle 순차적으로 실행
   const handleSubmit = (e) => {
     e.preventDefault();
     if(keyword[keyword.length-1] !== value) dispatch(cleanUpArticles());
@@ -20,6 +24,8 @@ function Search() {
       setValue("");
   };
 
+
+  // Clip 모아보기 토글함수 
   const handleClip = (e) => {
     setShowClip(!showClip)
   };
@@ -54,7 +60,7 @@ function Search() {
               </div>
             );
           })}
-        </div>) : (<div className="container">
+        </div>) : ( <div className="container">
            {articles.map((article) => {
             const title = article.headline.main;
             const id = article._id;
