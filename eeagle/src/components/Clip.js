@@ -39,7 +39,12 @@ const Clip = () => {
         <ListDiv key={ele._id}>
           <Title>
             {/*타이틀 클릭시 새창으로 이동*/}
-            <ATag href={ele.web_url} target="_blank" rel="noreferrer">
+            <ATag
+              href={ele.web_url}
+              target="_blank"
+              rel="noreferrer"
+              title="Detail view"
+            >
               {ele.headline.main}
             </ATag>
             <ClipIcon
