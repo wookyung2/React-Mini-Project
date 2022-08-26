@@ -1,9 +1,11 @@
 import styled from "styled-components";
+import LogoImage from "./img/Logo.svg";
+import SearchBtn from "./img/Search_btn.svg";
 
 export const ListContanier = styled.div`
   width: 800px;
   height: 878px;
-  margin: 52px 520px 0 120px;
+  margin: 80px 520px 0 120px;
 `;
 
 export const ListDiv = styled.div`
@@ -31,3 +33,106 @@ export const Content = styled.div`
   color: #3d3d3d;
   margin-bottom: 8px;
 `;
+
+export const NavBar = styled.div`
+  position: fixed;
+  min-width: 900px;
+  width: 100%;
+  height: 80px;
+  left: 0px;
+  top: 0px;
+  display: flex;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  background-color: white;
+`;
+
+export const Logo = styled.img`
+  position: absolute;
+  width: 80px;
+  height: 28px;
+  left: 120px;
+  top: 26px;
+  cursor: pointer;
+`;
+
+export const InputDiv = styled.div`
+  position: absolute;
+  width: 365px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #9e9e9e;
+
+  height: 32px;
+  left: 240px;
+  right: 835px;
+  top: 24px;
+
+  border: 1px solid #9e9e9e;
+  border-radius: 20px;
+`;
+
+export const InputIcon = styled.img`
+  position: absolute;
+  left: 2.74%;
+  right: 91.23%;
+  top: 15.62%;
+  bottom: 15.62%;
+  height: 22px;
+  width: 22px;
+`;
+
+export const Input = styled.input`
+  border: none;
+  position: absolute;
+  left: 10.96%;
+  right: 74.25%;
+  top: 21.88%;
+  bottom: 25%;
+  width: 300px;
+
+  &:focus {
+    outline: none;
+  }
+  &:focus::placeholder {
+    color: transparent;
+  }
+`;
+
+export const Button = styled.button`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+
+  position: absolute;
+  width: 70px;
+  height: 40px;
+  right: 120px;
+  top: 20px;
+
+  background: #0c2d6d;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  color: #eeeeee;
+`;
+
+export const Nav = () => {
+  return (
+    <NavBar>
+      <Logo src={LogoImage}></Logo>
+      <InputDiv>
+        <InputIcon src={SearchBtn}></InputIcon>
+        <Input placeholder="Search..." />
+      </InputDiv>
+      <Button>Clips</Button>
+    </NavBar>
+  );
+};
