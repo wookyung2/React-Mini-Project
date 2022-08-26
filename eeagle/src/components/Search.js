@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchArticle } from "../redux-store/newsSlice";
-import { clipToggle } from "../redux-store/newsSlice";
+import { clipToggle, keywordUpdate } from "../redux-store/newsSlice";
 import "./search.css";
 
 function Search() {
@@ -13,7 +13,9 @@ function Search() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(fetchArticle({keyword:value, page:page}));
+    dispatch(keywordUpdate({ keyword: value }));
+    // dispatch(fetchArticle({keyword:value, page:page}));
+    setValue("");
   };
 
   return (

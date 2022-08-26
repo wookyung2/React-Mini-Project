@@ -25,6 +25,14 @@ const newsSlice = createSlice({
       )  
       state.clipped.push(...clippedArticle);
     },
+    keywordUpdate: (state, action)=> {
+      const newKeywords = state.keyword.filter(keyword => 
+        keyword !== action.payload.keyword
+      )
+      if(newKeywords.length === 5) newKeywords.shift();
+      newKeywords.push(action.payload.keyword);
+      state.keyword = newKeywords;
+    },
   }, 
   extraReducers:{
     [fetchArticle.pending]: (state, action) => {
@@ -47,5 +55,5 @@ const newsSlice = createSlice({
 
 
 
-export const { clipToggle } = newsSlice.actions;
+export const { clipToggle, keywordUpdate } = newsSlice.actions;
 export default newsSlice.reducer;
