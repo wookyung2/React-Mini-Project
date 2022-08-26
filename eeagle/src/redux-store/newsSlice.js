@@ -18,6 +18,13 @@ const newsSlice = createSlice({
   name: 'news',
   initialState,
   reducers:{
+    clipToggle: (state, action) => {
+      const articles = state.articles
+      const clippedArticle = articles.filter(article =>
+          article._id === action.payload.id
+      )  
+      state.clipped.push(...clippedArticle);
+    },
   }, 
   extraReducers:{
     [fetchArticle.pending]: (state, action) => {
@@ -40,5 +47,5 @@ const newsSlice = createSlice({
 
 
 
-export const { } = newsSlice.actions;
+export const { clipToggle } = newsSlice.actions;
 export default newsSlice.reducer;

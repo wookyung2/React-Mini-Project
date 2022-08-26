@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchArticle } from "../redux-store/newsSlice";
+import { clipToggle } from "../redux-store/newsSlice";
 import "./search.css";
 
 function Search() {
@@ -33,7 +34,12 @@ function Search() {
             return (
               <div key={id} className="article-box">
                 <h1 className="title">{title}</h1>
-                <button onClick={() => {}}>clip</button>
+                <button  
+                  onClick={() => {
+                    dispatch(clipToggle({ id: id }));
+                  }}
+                  >clip
+                </button>
               </div>
             );
       })}
