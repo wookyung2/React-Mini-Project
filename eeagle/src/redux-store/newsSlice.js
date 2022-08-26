@@ -33,6 +33,10 @@ const newsSlice = createSlice({
       newKeywords.push(action.payload.keyword);
       state.keyword = newKeywords;
     },
+    cleanUpArticles: (state)=> {
+      state.articles = [];
+      state.page = 1;
+    },
   }, 
   extraReducers:{
     [fetchArticle.pending]: (state, action) => {
@@ -55,5 +59,5 @@ const newsSlice = createSlice({
 
 
 
-export const { clipToggle, keywordUpdate } = newsSlice.actions;
+export const { clipToggle, keywordUpdate, cleanUpArticles } = newsSlice.actions;
 export default newsSlice.reducer;

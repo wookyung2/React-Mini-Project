@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchArticle } from "../redux-store/newsSlice";
-import { clipToggle, keywordUpdate } from "../redux-store/newsSlice";
+import { clipToggle, keywordUpdate, cleanUpArticles } from "../redux-store/newsSlice";
 import "./search.css";
 
 function Search() {
@@ -13,8 +13,9 @@ function Search() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(keyword[keyword.length-1] !== value) dispatch(cleanUpArticles());
     dispatch(keywordUpdate({ keyword: value }));
-    // dispatch(fetchArticle({keyword:value, page:page}));
+    dispatch(fetchArticle({keyword:value, page:page}));
     setValue("");
   };
 
