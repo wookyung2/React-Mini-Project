@@ -9,6 +9,7 @@ import {
   ATag,
   ClipIcon,
   Content,
+  Nav
 } from "../style";
 
 const Clip = () => {
@@ -60,6 +61,7 @@ const Clip = () => {
     });
   return (
     <>
+      <Nav/>
       <ListContanier>{cliplist}</ListContanier>
     </>
   );
