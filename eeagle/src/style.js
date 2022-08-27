@@ -2,6 +2,8 @@ import styled from "styled-components";
 import LogoImage from "./img/Logo.svg";
 import SearchBtn from "./img/Search_btn.svg";
 
+import { useLocation } from "react-router-dom";
+
 export const ListContanier = styled.div`
   width: 800px;
   height: 878px;
@@ -125,14 +127,23 @@ export const Button = styled.button`
 `;
 
 export const Nav = () => {
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
+
   return (
     <NavBar>
-      <Logo src={LogoImage}></Logo>
-      <InputDiv>
-        <InputIcon src={SearchBtn}></InputIcon>
-        <Input placeholder="Search..." />
-      </InputDiv>
-      <Button>Clips</Button>
+      {isHome ? (
+        <Button>Clips</Button>
+      ) : (
+        <>
+          <Logo src={LogoImage}></Logo>
+          <InputDiv>
+            <InputIcon src={SearchBtn}></InputIcon>
+            <Input placeholder="Search..." />
+          </InputDiv>
+          <Button>Clips</Button>
+        </>
+      )}
     </NavBar>
   );
 };

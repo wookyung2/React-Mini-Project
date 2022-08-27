@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Nav/>
+        <Nav />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/search" element={<Search />} />
