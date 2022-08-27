@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ListContanier = styled.div`
   width: 800px;
   height: auto;
-  margin: 52px 520px 0 120px;
+  margin: 100px 520px 0 120px;
 
 `;
 
@@ -69,6 +69,11 @@ export const InputDiv = styled.div`
 
   border: 1px solid #9e9e9e;
   border-radius: 20px;
+
+  button{
+    visibility: hidden;
+  }
+
 `;
 
 export const InputIcon = styled.img`
