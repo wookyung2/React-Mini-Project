@@ -1,13 +1,12 @@
 import styled from "styled-components";
-import LogoImage from "./img/Logo.svg";
-import SearchBtn from "./img/Search_btn.svg";
 
 import { useLocation } from "react-router-dom";
 
 export const ListContanier = styled.div`
   width: 800px;
-  height: 878px;
-  margin: 80px 520px 0 120px;
+  height: auto;
+  margin: 100px 520px 0 120px;
+
 `;
 
 export const ListDiv = styled.div`
@@ -72,6 +71,11 @@ export const InputDiv = styled.div`
 
   border: 1px solid #9e9e9e;
   border-radius: 20px;
+
+  button{
+    visibility: hidden;
+  }
+
 `;
 
 export const InputIcon = styled.img`
@@ -126,24 +130,54 @@ export const Button = styled.button`
   color: #eeeeee;
 `;
 
-export const Nav = () => {
-  const { pathname } = useLocation();
-  const isHome = pathname === "/";
 
-  return (
-    <NavBar>
-      {isHome ? (
-        <Button>Clips</Button>
-      ) : (
-        <>
-          <Logo src={LogoImage}></Logo>
-          <InputDiv>
-            <InputIcon src={SearchBtn}></InputIcon>
-            <Input placeholder="Search..." />
-          </InputDiv>
-          <Button>Clips</Button>
-        </>
-      )}
-    </NavBar>
-  );
-};
+export const SearchButton = styled.button`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+
+  position: absolute;
+  width: 70px;
+  height: 40px;
+  right: 200px;
+  top: 20px;
+
+  background: #0c2d6d;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  color: #eeeeee;
+`;
+
+export const MainButton = styled.button`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+
+  position: absolute;
+  width: 70px;
+  height: 40px;
+  right: 280px;
+  top: 20px;
+
+  background: #0c2d6d;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  color: #eeeeee;
+`;
+
