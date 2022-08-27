@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { FetchApi } from "../util/FetchApi";
 import clipmark from "../img/clipmark.svg";
+import Nav from "./Nav";
 import {
   ListContanier,
   ListDiv,
@@ -9,7 +10,6 @@ import {
   ATag,
   ClipIcon,
   Content,
-  Nav
 } from "../style";
 
 const Clip = () => {
