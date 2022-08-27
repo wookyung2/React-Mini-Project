@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ListContanier = styled.div`
   width: 800px;
-  height: 878px;
+  height: auto;
   margin: 52px 520px 0 120px;
 `;
 

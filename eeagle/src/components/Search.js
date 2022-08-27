@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchArticle } from "../redux-store/newsSlice";
 import { clipToggle, keywordUpdate, cleanUpArticles } from "../redux-store/newsSlice";
-import "./search.css";
+import {ListContanier, ListDiv} from '../style'
 
 function Search() {
   const [value, setValue] = useState("");
@@ -43,12 +43,12 @@ function Search() {
       <div>
         <button onClick={handleClip}>Show Clip</button>
       </div>
-      {showClip ? ( <div className="container">
+      {showClip ? ( <ListContanier >
            {clipped.map((article) => {
             const title = article.headline.main;
             const id = article._id;
             return (
-              <div key={id} className="article-box">
+              <ListDiv key={id} >
                 <h1 className="title">{title}</h1>
                 <button
                   onClick={() => {
@@ -57,15 +57,15 @@ function Search() {
                 >
                   clip
                 </button>
-              </div>
+              </ListDiv>
             );
           })}
-        </div>) : ( <div className="container">
+        </ListContanier>) : ( <ListContanier>
            {articles.map((article) => {
             const title = article.headline.main;
             const id = article._id;
             return (
-              <div key={id} className="article-box">
+              <ListDiv key={id} >
                 <h1 className="title">{title}</h1>
                 <button
                   onClick={() => {
@@ -73,10 +73,10 @@ function Search() {
                   }}
                 >clip
                 </button>
-              </div>
+              </ListDiv>
             );
           })}
-        </div>)}
+        </ListContanier>)}
 
     </>
   );
