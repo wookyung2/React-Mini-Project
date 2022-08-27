@@ -1,4 +1,3 @@
-
 import React, { useRef, useState } from "react";
 import "./Main.scss";
 import { HiOutlineSearch } from "react-icons/hi";
@@ -54,43 +53,38 @@ export default function Main() {
   };
 
 
-const Main = () => {
-  const {keyword} = useSelector(state => state.news);
   return (
-    <>
-
-      <div className="search-container">
-        <h1 className="logo">Eeagle</h1>
-        <div className="search-form">
-          {/* 검색어 다섯개 초과 시 하나씩 삭제 */}
-          <form onSubmit={onSubmit}>
-            <HiOutlineSearch className="search-icon" />
-            <input
-              value={value}
-              type="text"
-              placeholder="Search.."
-              onChange={onChange}
-              onFocus={onFocus}
-              onBlur={onFocusout}
-            />
-          </form>
-          {/* 검색어 거꾸로 출력 및 focus일때 dropdwon toggle생성 */}
-          {historyToggle && (
-            <ul className="dropdown">
-              {[...histories].reverse().map((history, i) => (
-                <li key={i}>
-                  <HiOutlineSearch className="search-icon" />
-                  {history}
-                </li>
-              ))}
-            </ul>
-          )}
+      <>
+        <div className="search-container">
+          
+          <div className="search-form">
+            {/* 검색어 다섯개 초과 시 하나씩 삭제 */}
+            <form onSubmit={onSubmit}>
+            <h1 className="logo">Eeagle</h1>
+              <HiOutlineSearch className="search-icon" />
+              <input
+                value={value}
+                type="text"
+                placeholder="Search.."
+                onChange={onChange}
+                onFocus={onFocus}
+                onBlur={onFocusout}
+              />
+            </form>
+            {/* 검색어 거꾸로 출력 및 focus일때 dropdwon toggle생성 */}
+            {historyToggle && (
+              <ul className="dropdown">
+                {[...histories].reverse().map((history, i) => (
+                  <li key={i}>
+                    <HiOutlineSearch className="search-icon" />
+                    {history}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
-
-      </div>
-      
-    </>
+      </>
   )
 }
 
-export default Main
