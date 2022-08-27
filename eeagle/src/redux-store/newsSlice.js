@@ -53,9 +53,9 @@ const newsSlice = createSlice({
     // page를 1로 초기화 해준다. 
     cleanUpArticles: (state, action)=> {
       state.articles = [];
-      state.clipped.map((article)=>{
-        state.articles.push(article);
-      })
+      // state.clipped.map((article)=>{
+      //   state.articles.push(article);
+      // })
       state.page = 1;
     },
   }, 

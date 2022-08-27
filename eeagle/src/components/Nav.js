@@ -38,7 +38,6 @@ const Nav = () => {
           placeholder="Search..."
           onChange={(e) => setValue(e.target.value)}
           />
-          <button type="submit">submit</button>
         </form>
       </InputDiv>
         <Link to='/clip'><Button type='submit'>Clips</Button></Link>
