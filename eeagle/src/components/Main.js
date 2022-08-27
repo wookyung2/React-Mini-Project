@@ -1,3 +1,4 @@
+
 import React, { useRef, useState } from "react";
 import "./Main.scss";
 import { HiOutlineSearch } from "react-icons/hi";
@@ -52,8 +53,12 @@ export default function Main() {
     navigate(`/search?q=${value}`);
   };
 
+
+const Main = () => {
+  const {keyword} = useSelector(state => state.news);
   return (
     <>
+
       <div className="search-container">
         <h1 className="logo">Eeagle</h1>
         <div className="search-form">
@@ -81,7 +86,11 @@ export default function Main() {
             </ul>
           )}
         </div>
+
       </div>
+      
     </>
-  );
+  )
 }
+
+export default Main
