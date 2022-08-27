@@ -14,7 +14,7 @@ export default function Main() {
   );
   const [historyToggle, setHistoryToggle] = useState(false);
 
-  //마지막 입력 후 0.5초 동안 아무입력 없으면 페이지 이동
+  //마지막 입력 후 0.5초 동안 아무입력 없으면 페이지 이동한다.
 
   const onChange = (e) => {
     clearTimeout(timerId.current);
