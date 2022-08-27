@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchArticle } from "../redux-store/newsSlice";
-import { clipToggle, keywordUpdate, cleanUpArticles } from "../redux-store/newsSlice";
-import {ListContanier, ListDiv} from '../style'
+import {
+  clipToggle,
+  keywordUpdate,
+  cleanUpArticles,
+} from "../redux-store/newsSlice";
+import { ListContanier, ListDiv } from "../style";
 
 function Search() {
   const [value, setValue] = useState("");
@@ -12,22 +16,20 @@ function Search() {
   );
   const dispatch = useDispatch();
 
-
-  // Submit 핸들함수 
+  // Submit 핸들함수
   // 바로전 키워드와 다르면 Articles를 cleanup하고,
   // 그 후 keywordUpdate, fetchArticle 순차적으로 실행
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(keyword[keyword.length-1] !== value) dispatch(cleanUpArticles());
-      dispatch(keywordUpdate({ keyword: value }));
-      dispatch(fetchArticle({keyword:value, page:page}));
-      setValue("");
+    if (keyword[keyword.length - 1] !== value) dispatch(cleanUpArticles());
+    dispatch(keywordUpdate({ keyword: value }));
+    dispatch(fetchArticle({ keyword: value, page: page }));
+    setValue("");
   };
 
-
-  // Clip 모아보기 토글함수 
+  // Clip 모아보기 토글함수
   const handleClip = (e) => {
-    setShowClip(!showClip)
+    setShowClip(!showClip);
   };
 
   return (
@@ -43,12 +45,13 @@ function Search() {
       <div>
         <button onClick={handleClip}>Show Clip</button>
       </div>
-      {showClip ? ( <ListContanier >
-           {clipped.map((article) => {
+      {showClip ? (
+        <ListContanier>
+          {clipped.map((article) => {
             const title = article.headline.main;
             const id = article._id;
             return (
-              <ListDiv key={id} >
+              <ListDiv key={id}>
                 <h1 className="title">{title}</h1>
                 <button
                   onClick={() => {
@@ -60,24 +63,27 @@ function Search() {
               </ListDiv>
             );
           })}
-        </ListContanier>) : ( <ListContanier>
-           {articles.map((article) => {
+        </ListContanier>
+      ) : (
+        <ListContanier>
+          {articles.map((article) => {
             const title = article.headline.main;
             const id = article._id;
             return (
-              <ListDiv key={id} >
+              <ListDiv key={id}>
                 <h1 className="title">{title}</h1>
                 <button
                   onClick={() => {
                     dispatch(clipToggle({ id: id }));
                   }}
-                >clip
+                >
+                  clip
                 </button>
               </ListDiv>
             );
           })}
-        </ListContanier>)}
-
+        </ListContanier>
+      )}
     </>
   );
 }
