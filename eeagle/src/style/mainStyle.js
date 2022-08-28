@@ -1,23 +1,16 @@
-html {
-  /* 1rem = 10px */
-  font-size: 62.5%;
-}
+import styled from "styled-components";
 
-$color: #9e9e9e;
+const LightGrey = "#9e9e9e";
 
-.search-container {
+export const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
-}
+`;
 
-#root {
-  position: relative;
-}
-
-.search-form {
+export const SearchForm = styled.div`
   position: relative;
   width: 57.2rem;
   top: 5rem;
@@ -29,36 +22,35 @@ $color: #9e9e9e;
 
     box-sizing: border-box;
     border-radius: 2rem;
-    border: 0.1rem solid $color;
+    border: 0.1rem solid ${LightGrey};
 
     &:focus {
-      outline: $color;
+      outline: ${LightGrey};
       border-radius: 2rem 2rem 0 0;
     }
   }
-  
-  .logo {
-    position: absolute;
-    font-size: 7rem;
-    color: #3d3d3d;
-    bottom: 2rem;
-    left: 17rem;
-  }
 
-
-  .search-icon {
+  .SearchIcon {
     position: absolute;
     top: 4.8rem;
     top: 50%;
     left: 1.6rem;
     font-size: 1.7rem;
     z-index: 1;
-    color: $color;
+    color: ${LightGrey};
     transform: translateY(-50%);
   }
-}
+`;
 
-.dropdown {
+export const Logo = styled.h1`
+  position: absolute;
+  font-size: 7rem;
+  color: #3d3d3d;
+  bottom: 2rem;
+  left: 17rem;
+`;
+
+export const Dropdown = styled.ul`
   position: absolute;
   font-size: 1.8rem;
   width: 100%;
@@ -66,25 +58,25 @@ $color: #9e9e9e;
   padding-bottom: 1rem;
   margin: 0;
   border-radius: 0 0 2rem 2rem;
-  border: 0.1rem solid $color;
+  border: 0.1rem solid ${LightGrey};
   border-top: none;
   box-sizing: border-box;
-  color: $color;
+  color: ${LightGrey};
 
-  .search-icon {
+  .ListIcon {
     position: absolute;
     top: 0.5rem;
     left: 1.6rem;
     font-size: 1.7rem;
     z-index: 1;
-    color: $color;
+    color: ${LightGrey};
   }
-}
+`;
 
-li {
+export const List = styled.li`
   position: relative;
   padding-left: 3.8rem;
   margin-top: 1.5rem;
 
   list-style: none;
-}
+`;

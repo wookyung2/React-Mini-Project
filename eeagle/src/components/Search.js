@@ -10,7 +10,7 @@ import {
   ATag,
   ClipIcon,
   Content,
-} from "../style";
+} from "../style/style";
 import clipmark from "../img/clipmark.svg";
 import unclipmark from "../img/unclipmark.svg";
 
