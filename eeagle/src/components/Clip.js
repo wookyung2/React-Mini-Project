@@ -9,15 +9,13 @@ import {
   ATag,
   ClipIcon,
   Content,
-} from "../style";
+} from "../style/style";
 import { useDispatch, useSelector } from "react-redux";
-import {clipToggle} from "../redux-store/newsSlice"
+import { clipToggle } from "../redux-store/newsSlice";
 
 const Clip = () => {
   // const [clip, useClip] = useState();
-  const {clipped : clippedArticles} = useSelector(
-    (state) => state.news
-  );
+  const { clipped: clippedArticles } = useSelector((state) => state.news);
   const dispatch = useDispatch();
 
   // useEffect(() => {
@@ -66,30 +64,30 @@ const Clip = () => {
   //   });
   return (
     <>
-      <Nav/>
+      <Nav />
       <ListContanier>
-        {clippedArticles.map((ele) =>
-         <ListDiv key={ele._id}>
-         <Title>
-           {/*타이틀 클릭시 새창으로 이동*/}
-           <ATag
-             href={ele.web_url}
-             target="_blank"
-             rel="noreferrer"
-             title="Detail view"
-           >
-             {ele.headline.main}
-           </ATag>
-           <ClipIcon
-             src={clipmark}
-             alt="clipicon"
-             onClick={() => dispatch(clipToggle({id:ele._id}))}
-           ></ClipIcon>
-         </Title>
-         <Content>{ele.snippet}</Content>
-         {/* <Content>{date}</Content> */}
-       </ListDiv>
-        )}
+        {clippedArticles.map((ele) => (
+          <ListDiv key={ele._id}>
+            <Title>
+              {/*타이틀 클릭시 새창으로 이동*/}
+              <ATag
+                href={ele.web_url}
+                target="_blank"
+                rel="noreferrer"
+                title="Detail view"
+              >
+                {ele.headline.main}
+              </ATag>
+              <ClipIcon
+                src={clipmark}
+                alt="clipicon"
+                onClick={() => dispatch(clipToggle({ id: ele._id }))}
+              ></ClipIcon>
+            </Title>
+            <Content>{ele.snippet}</Content>
+            {/* <Content>{date}</Content> */}
+          </ListDiv>
+        ))}
       </ListContanier>
     </>
   );

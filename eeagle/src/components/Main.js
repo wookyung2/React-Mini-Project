@@ -1,7 +1,15 @@
 import React, { useRef, useState } from "react";
-import "./Main.scss";
+import "../style/MainStyle.js";
 import { HiOutlineSearch } from "react-icons/hi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  Dropdown,
+  List,
+  Logo,
+  SearchContainer,
+  SearchForm,
+} from "../style/MainStyle.js";
+import { Button, NavBar } from "../style/style.js";
 
 const localHistoryKey = "search";
 
@@ -14,7 +22,7 @@ export default function Main() {
   );
   const [historyToggle, setHistoryToggle] = useState(false);
 
-  //마지막 입력 후 0.5초 동안 아무입력 없으면 페이지 이동
+  //마지막 입력 후 0.5초 동안 아무입력 없으면 페이지 이동.
 
   const onChange = (e) => {
     clearTimeout(timerId.current);
@@ -22,18 +30,16 @@ export default function Main() {
       if (e.target.value) {
         navigate("/search");
       } else alert("검색어를 입력해주세요");
-    }, 3000);
+    }, 500);
 
     setValue(e.target.value);
   };
-
+  // Focus에 따라 DropDown on/off
   const onFocus = () => {
-    console.log("focus");
     setHistoryToggle(true);
   };
 
   const onFocusout = () => {
-    console.log("focusout");
     setHistoryToggle(false);
   };
 
@@ -54,12 +60,17 @@ export default function Main() {
 
   return (
     <>
-      <div className="search-container">
-        <div className="search-form">
+      <NavBar>
+        <Link to="/clip">
+          <Button type="submit">Clips</Button>
+        </Link>
+      </NavBar>
+      <SearchContainer>
+        <SearchForm>
           {/* 검색어 다섯개 초과 시 하나씩 삭제 */}
           <form onSubmit={onSubmit}>
-            <h1 className="logo">Eeagle</h1>
-            <HiOutlineSearch className="search-icon" />
+            <Logo>Eeagle</Logo>
+            <HiOutlineSearch className="SearchIcon" />
             <input
               value={value}
               type="text"
@@ -69,19 +80,18 @@ export default function Main() {
               onBlur={onFocusout}
             />
           </form>
-          {/* 검색어 거꾸로 출력 및 focus일때 dropdwon toggle생성 */}
           {historyToggle && (
-            <ul className="dropdown">
+            <Dropdown>
               {[...histories].reverse().map((history, i) => (
-                <li key={i}>
-                  <HiOutlineSearch className="search-icon" />
+                <List key={i}>
+                  <HiOutlineSearch className="ListIcon" />
                   {history}
-                </li>
+                </List>
               ))}
-            </ul>
+            </Dropdown>
           )}
-        </div>
-      </div>
+        </SearchForm>
+      </SearchContainer>
     </>
   );
 }
