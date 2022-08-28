@@ -1,9 +1,18 @@
+import React from "react"
+import {BrowserRouter, Routes, Route} from "react-router-dom"
+import Main from "./components/Main";
+import Search from "./components/Search";
+import Clip from "./components/Clip";
 
-function App() {
+const App = () => {
   return (
-    <>
-      Hello
-    </>
+      <>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Search/>} />
+        </Routes>
+      </BrowserRouter>
+      </>
   );
 }
 
