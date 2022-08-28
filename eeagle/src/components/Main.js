@@ -13,7 +13,6 @@ export default function Main() {
     localStorage.getItem(localHistoryKey)?.split(",") ?? []
   );
   const [historyToggle, setHistoryToggle] = useState(false);
-  const reversed = histories.reverse();
 
   //마지막 입력 후 0.5초 동안 아무입력 없으면 페이지 이동
 
@@ -42,6 +41,12 @@ export default function Main() {
   //submit 후 /search 페이지로 이동 및 검색어 저장
   const onSubmit = (e) => {
     e.preventDefault();
+
+    if (histories.length > 5) {
+      // reversed.pop()
+      return;
+    }
+
     setHistory([...histories, value]);
     setValue("");
     localStorage.setItem(localHistoryKey, [...histories, value]);
@@ -51,10 +56,10 @@ export default function Main() {
   return (
     <>
       <div className="search-container">
-        <h1 className="logo">Eeagle</h1>
         <div className="search-form">
           {/* 검색어 다섯개 초과 시 하나씩 삭제 */}
-          <form onSubmit={histories.length > 5 ? reversed.pop() : onSubmit}>
+          <form onSubmit={onSubmit}>
+            <h1 className="logo">Eeagle</h1>
             <HiOutlineSearch className="search-icon" />
             <input
               value={value}
