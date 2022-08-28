@@ -17,7 +17,6 @@ export default function Main() {
   //마지막 입력 후 0.5초 동안 아무입력 없으면 페이지 이동
 
   const onChange = (e) => {
-    console.log(timerId.current);
     clearTimeout(timerId.current);
     timerId.current = setTimeout(() => {
       if (e.target.value) {
