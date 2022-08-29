@@ -51,9 +51,9 @@ export default function Main() {
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(keywordUpdate({ keyword: value }));
-    navigate(`/search?q=${e.target.value}`);
-    dispatch(cleanUpArticles());
-    dispatch(fetchArticle({ keyword: e.target.value, page: 1 }));
+    // navigate(`/search?q=${e.target.value}`);
+    // dispatch(cleanUpArticles());
+    // dispatch(fetchArticle({ keyword: e.target.value, page: 1 }));
   };
 
   return (
