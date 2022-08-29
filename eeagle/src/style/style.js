@@ -1,12 +1,9 @@
 import styled from "styled-components";
 
-import { useLocation } from "react-router-dom";
-
 export const ListContanier = styled.div`
   width: 800px;
   height: auto;
   margin: 100px 520px 0 120px;
-
 `;
 
 export const ListDiv = styled.div`
@@ -72,10 +69,9 @@ export const InputDiv = styled.div`
   border: 1px solid #9e9e9e;
   border-radius: 20px;
 
-  button{
+  button {
     visibility: hidden;
   }
-
 `;
 
 export const InputIcon = styled.img`
@@ -130,7 +126,6 @@ export const Button = styled.button`
   color: #eeeeee;
 `;
 
-
 export const SearchButton = styled.button`
   display: flex;
   flex-direction: column;
@@ -180,4 +175,3 @@ export const MainButton = styled.button`
   line-height: 100%;
   color: #eeeeee;
 `;
-
