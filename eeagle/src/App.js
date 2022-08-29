@@ -1,18 +1,19 @@
-import React from "react"
-import {BrowserRouter, Routes, Route} from "react-router-dom"
 import Main from "./components/Main";
 import Search from "./components/Search";
 import Clip from "./components/Clip";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-const App = () => {
+function App() {
   return (
-      <>
+    <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Search/>} />
+          <Route path="/" element={<Main />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/clip" element={<Clip />} />
         </Routes>
       </BrowserRouter>
-      </>
+    </>
   );
 }
 
