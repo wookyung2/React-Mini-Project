@@ -10,9 +10,10 @@ import {
   MainButton,
   SearchButton,
 } from "../style/style";
+import { Dropdown, List } from "../style/mainStyle.js";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   keywordUpdate,
   cleanUpArticles,
@@ -21,8 +22,31 @@ import {
 
 const Nav = () => {
   const [value, setValue] = useState("");
+  const timerId = useRef(null);
   const dispatch = useDispatch();
   const { keyword, page } = useSelector((state) => state.news);
+  const [historyToggle, setHistoryToggle] = useState(false);
+
+  //Change 핸들함수
+  //검색어 입력후 0.5초동안 추가입력이 없을 시 fetchArticle 실행
+  const handleChange = (e) => {
+    clearTimeout(timerId);
+    timerId.current = setTimeout(() => {
+      if (e.target.value) {
+        dispatch(cleanUpArticles());
+        dispatch(fetchArticle({ keyword: e.target.value, page: 1 }));
+      }
+    }, 500);
+    setValue(e.target.value);
+  };
+
+  const onFocus = () => {
+    setHistoryToggle(true);
+  };
+
+  const onFocusout = () => {
+    setHistoryToggle(false);
+  };
 
   // Submit 핸들함수
   // 바로전 키워드와 다르면 Articles를 cleanup하고,
@@ -50,10 +74,16 @@ const Nav = () => {
             value={value}
             type="text"
             placeholder="Search..."
-            onChange={(e) => setValue(e.target.value)}
+            onChange={handleChange}
+            onFocus={onFocus}
+            onBlur={onFocusout}
           />
         </form>
+        {/* <Dropdown>
+          <List>123</List>
+        </Dropdown> */}
       </InputDiv>
+
       <Link to="/clip">
         <Button type="submit">Clips</Button>
       </Link>
