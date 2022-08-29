@@ -93,9 +93,6 @@ export const Input = styled.input`
   bottom: 25%;
   width: 300px;
 
-  &:focus {
-    outline: none;
-  }
   &:focus::placeholder {
     color: transparent;
   }

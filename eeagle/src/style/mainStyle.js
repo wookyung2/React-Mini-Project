@@ -52,7 +52,11 @@ export const Logo = styled.h1`
 
 export const Dropdown = styled.ul`
   position: absolute;
-  font-size: 1.8rem;
+
+  font-size: ${(props) => (props.nav ? "1.2rem" : "1.8rem")};
+  font-weight: ${(props) => (props.nav ? "400" : null)};
+  top: ${(props) => (props.nav ? "1.2rem" : null)};
+
   width: 100%;
   padding: 0;
   padding-bottom: 1rem;
@@ -73,9 +77,19 @@ export const Dropdown = styled.ul`
   }
 `;
 
+export const InputIcon = styled.img`
+  position: absolute;
+  left: 2.74%;
+  right: 91.23%;
+  top: 15.62%;
+  bottom: 15.62%;
+  height: 22px;
+  width: 22px;
+`;
+
 export const List = styled.li`
   position: relative;
-  padding-left: 3.8rem;
+  padding-left: ${(props) => (props.nav ? "2.6rem" : "3.8rem")};
   margin-top: 1.5rem;
   list-style: none;
 `;
