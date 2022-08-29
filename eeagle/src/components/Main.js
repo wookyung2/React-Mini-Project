@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { keywordUpdate } from "../redux-store/newsSlice.js";
 import {
   Dropdown,
   List,
@@ -10,15 +12,12 @@ import {
 } from "../style/mainStyle.js";
 import { Button, NavBar } from "../style/style.js";
 
-const localHistoryKey = "search";
-
 export default function Main() {
   const navigate = useNavigate();
   const [value, setValue] = useState("");
   const timerId = useRef(null);
-  const [histories, setHistory] = useState(
-    localStorage.getItem(localHistoryKey)?.split(",") ?? []
-  );
+  const dispatch = useDispatch();
+  const { keyword } = useSelector((state) => state.news);
   const [historyToggle, setHistoryToggle] = useState(false);
 
   //마지막 입력 후 0.5초 동안 아무입력 없으면 페이지 이동.
@@ -27,7 +26,7 @@ export default function Main() {
     clearTimeout(timerId.current);
     timerId.current = setTimeout(() => {
       if (e.target.value) {
-        navigate("/search");
+        navigate(`/search?q=${e.target.value}`);
       } else alert("검색어를 입력해주세요");
     }, 500);
 
@@ -45,16 +44,9 @@ export default function Main() {
   //submit 후 /search 페이지로 이동 및 검색어 저장
   const onSubmit = (e) => {
     e.preventDefault();
-
-    if (histories.length > 5) {
-      // reversed.pop()
-      return;
-    }
-
-    setHistory([...histories, value]);
-    setValue("");
-    localStorage.setItem(localHistoryKey, [...histories, value]);
-    navigate(`/search?q=${value}`);
+    dispatch(keywordUpdate({ keyword: value }));
+    console.log({ keyword });
+    navigate(`/search?q=${e.target.value}`);
   };
 
   return (
@@ -81,10 +73,10 @@ export default function Main() {
           </form>
           {historyToggle && (
             <Dropdown>
-              {[...histories].reverse().map((history, i) => (
+              {keyword.map((word, i) => (
                 <List key={i}>
                   <HiOutlineSearch className="ListIcon" />
-                  {history}
+                  {word}
                 </List>
               ))}
             </Dropdown>
