@@ -2,7 +2,11 @@ import React, { useRef, useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { keywordUpdate } from "../redux-store/newsSlice.js";
+import {
+  cleanUpArticles,
+  fetchArticle,
+  keywordUpdate,
+} from "../redux-store/newsSlice.js";
 import {
   Dropdown,
   List,
@@ -17,7 +21,7 @@ export default function Main() {
   const [value, setValue] = useState("");
   const timerId = useRef(null);
   const dispatch = useDispatch();
-  const { keyword } = useSelector((state) => state.news);
+  const { keyword, page } = useSelector((state) => state.news);
   const [historyToggle, setHistoryToggle] = useState(false);
 
   //마지막 입력 후 0.5초 동안 아무입력 없으면 페이지 이동.
@@ -27,6 +31,8 @@ export default function Main() {
     timerId.current = setTimeout(() => {
       if (e.target.value) {
         navigate(`/search?q=${e.target.value}`);
+        dispatch(cleanUpArticles());
+        dispatch(fetchArticle({ keyword: e.target.value, page: 1 }));
       } else alert("검색어를 입력해주세요");
     }, 500);
 
@@ -45,8 +51,9 @@ export default function Main() {
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(keywordUpdate({ keyword: value }));
-    console.log({ keyword });
     navigate(`/search?q=${e.target.value}`);
+    dispatch(cleanUpArticles());
+    dispatch(fetchArticle({ keyword: e.target.value, page: 1 }));
   };
 
   return (
