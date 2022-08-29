@@ -47,15 +47,11 @@ const newsSlice = createSlice({
       newKeywords.push(action.payload.keyword);
       state.keyword = newKeywords;
     },
-
     // 키워드가 변동되면 articles를 비워주고,
     // clipped Articles로 채워준다.
     // page를 1로 초기화 해준다. 
     cleanUpArticles: (state, action)=> {
       state.articles = [];
-      // state.clipped.map((article)=>{
-      //   state.articles.push(article);
-      // })
       state.page = 1;
     },
   }, 
