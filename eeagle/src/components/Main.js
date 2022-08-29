@@ -26,11 +26,11 @@ export default function Main() {
 
         if(text !== checkText.current) {
           checkText.current = text
+          console.log(1)
           dispatch(clear())
           dispatch(getList({value : e.target.value, page : 1}))
         }
-        console.log(1)
-
+        
         navigate(`/search?q=${e.target.value}`);
       } else alert("검색어를 입력해주세요");
     }, 1500);
