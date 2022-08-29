@@ -39,7 +39,10 @@ const Clip = () => {
            ></ClipIcon>
          </Title>
          <Content>{ele.snippet}</Content>
-         {/* <Content>{date}</Content> */}
+         <Content>{`${ele.pub_date.substr(0, 4)}.${ele.pub_date.substr(
+              5,
+              2
+            )}.${ele.pub_date.substr(8, 2)}`}</Content>
        </ListDiv>
         )}
       </ListContanier>
