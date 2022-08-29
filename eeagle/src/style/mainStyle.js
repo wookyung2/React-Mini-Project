@@ -77,6 +77,5 @@ export const List = styled.li`
   position: relative;
   padding-left: 3.8rem;
   margin-top: 1.5rem;
-
   list-style: none;
 `;

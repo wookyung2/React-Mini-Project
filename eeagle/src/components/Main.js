@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import "../style/MainStyle.js";
 import { HiOutlineSearch } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -8,7 +7,7 @@ import {
   Logo,
   SearchContainer,
   SearchForm,
-} from "../style/MainStyle.js";
+} from "../style/mainStyle.js";
 import { Button, NavBar } from "../style/style.js";
 
 const localHistoryKey = "search";
