@@ -5,7 +5,6 @@ import {
   Logo,
   InputDiv,
   Button,
-  Input,
   InputIcon,
   MainButton,
   SearchButton,
@@ -35,7 +34,7 @@ const Nav = () => {
       if (e.target.value) {
         dispatch(cleanUpArticles());
         dispatch(fetchArticle({ keyword: e.target.value, page: 1 }));
-      } else alert("검색어를 입력해주세요");
+      }
     }, 500);
     setValue(e.target.value);
   };
