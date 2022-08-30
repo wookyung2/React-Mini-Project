@@ -1,6 +1,18 @@
 import LogoImage from "../img/Logo.svg";
 import SearchBtn from "../img/Search_btn.svg";
-import { NavBar, Logo, InputDiv, Button, Input, InputIcon ,MainButton, SearchButton } from "../style";
+import { 
+  NavBar,
+  Logo, 
+  InputDiv, 
+  Button, 
+  Input, 
+  InputIcon,
+  MainButton, 
+  SearchButton,
+  Dropdown,
+  List 
+}
+from "../style";
 import { Link } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 import { useRef, useState } from "react";
@@ -60,14 +72,14 @@ const Nav = () => {
           />
         </form>
         {historyToggle && (
-            <ul className="dropdown">
+            <Dropdown nav> 
               {[...keywordList].reverse().map((history, i) => (
-                <li key={i}>
-                  <HiOutlineSearch className="search-icon" />
+                <List nav key={i}>
+                  <InputIcon src={SearchBtn}></InputIcon>
                   {history}
-                </li>
+                </List>
               ))}
-            </ul>
+            </Dropdown>
           )}
       </InputDiv>
         <Link to='/clip'><Button type='submit'>Clips</Button></Link>

@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import "./Main.scss";
+import { Dropdown,List } from "../style";
 import { HiOutlineSearch } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { useSelector,useDispatch } from "react-redux"
@@ -63,14 +64,14 @@ export default function Main() {
             />
           </form>
           {historyToggle && (
-            <ul className="dropdown">
-              {[...keywordList].reverse().map((history, i) => (
-                <li key={i}>
-                  <HiOutlineSearch className="search-icon" />
-                  {history}
-                </li>
-              ))}
-            </ul>
+              <Dropdown> 
+                {[...keywordList].reverse().map((history, i) => (
+                  <List key={i}>
+                    <HiOutlineSearch className="search-icon" />
+                    {history}
+                  </List>
+                ))}
+              </Dropdown>
           )}
         </div>
       </div>

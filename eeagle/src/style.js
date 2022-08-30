@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+const LightGrey = "#9e9e9e";
+
 export const ListContanier = styled.div`
   width: 800px;
   height: auto;
@@ -164,21 +166,34 @@ export const MainButton = styled.button`
   color: #eeeeee;
 `;
 
-export const DropDown = styled.ul`
+export const Dropdown = styled.ul`
+  position: absolute;
+  font-size: ${(props) => (props.nav ? "1rem" : "1.8rem")};
+  font-weight: ${(props) => (props.nav ? "400" : null)};
+  top: ${(props) => (props.nav ? "2rem" : null)};
+  width: 100%;
+  padding: 0;
+  padding-bottom: 1rem;
+  margin: 0;
+  border-radius: 0 0 2rem 2rem;
+  border: 0.1rem solid ${LightGrey};
+  border-top: none;
   box-sizing: border-box;
-  position: absolute;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
-  background: #FFFFFF;
-  border-radius: 20px;
-`
-export const SearchIcon = styled.img`
-  position: absolute;
-  top: 0.5rem;
-  left: 1.6rem;
-  font - size: 1.7rem;
-  z - index: 1;
-  color: $color;
-`
+  background-color: white;
+  color: ${LightGrey};
+  .ListIcon {
+    position: absolute;
+    top: 0.5rem;
+    left: 1.6rem;
+    font-size: 1.7rem;
+    z-index: 1;
+    color: ${LightGrey};
+  }
+`;
+
+export const List = styled.li`
+  position: relative;
+  padding-left: ${(props) => (props.nav ? "2.6rem" : "3.8rem")};
+  margin-top: ${(props) => (props.nav ? "0.6rem" : "1.5rem")};
+  list-style: none;
+`;
