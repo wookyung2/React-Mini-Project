@@ -20,7 +20,9 @@ import {
 } from "../redux-store/newsSlice";
 
 const Nav = () => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(
+    useSelector((state) => state.news.keyword.at(-1))
+  );
   const timerId = useRef(null);
   const dispatch = useDispatch();
   const keyword = useSelector((state) => state.news.keyword);
@@ -30,6 +32,7 @@ const Nav = () => {
   //Change 핸들함수
   //검색어 입력후 0.5초동안 추가입력이 없을 시 fetchArticle 실행
   const handleChange = (e) => {
+    setValue(e.target.value);
     clearTimeout(timerId.current);
     timerId.current = setTimeout(() => {
       if (e.target.value) {
@@ -37,11 +40,11 @@ const Nav = () => {
         dispatch(fetchArticle({ keyword: e.target.value, page: 1 }));
       }
     }, 500);
-    setValue(e.target.value);
   };
 
   const onFocus = () => {
     setHistoryToggle(true);
+    setValue("");
   };
 
   const onFocusout = () => {
