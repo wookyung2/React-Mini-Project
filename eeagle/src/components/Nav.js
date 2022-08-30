@@ -23,7 +23,8 @@ const Nav = () => {
   const [value, setValue] = useState("");
   const timerId = useRef(null);
   const dispatch = useDispatch();
-  const { keyword, page } = useSelector((state) => state.news);
+  const keyword = useSelector((state) => state.news.keyword);
+  const page = useSelector((state) => state.news.page);
   const [historyToggle, setHistoryToggle] = useState(false);
 
   //Change 핸들함수
