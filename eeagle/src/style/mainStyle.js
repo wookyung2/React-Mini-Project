@@ -53,18 +53,20 @@ export const Logo = styled.h1`
 export const Dropdown = styled.ul`
   position: absolute;
 
-  font-size: ${(props) => (props.nav ? "1.2rem" : "1.8rem")};
+  font-size: ${(props) => (props.nav ? "1rem" : "1.8rem")};
   font-weight: ${(props) => (props.nav ? "400" : null)};
-  top: ${(props) => (props.nav ? "1.2rem" : null)};
+  top: ${(props) => (props.nav ? "2rem" : null)};
 
   width: 100%;
   padding: 0;
   padding-bottom: 1rem;
   margin: 0;
+
   border-radius: 0 0 2rem 2rem;
   border: 0.1rem solid ${LightGrey};
   border-top: none;
   box-sizing: border-box;
+  background-color: white;
   color: ${LightGrey};
 
   .ListIcon {
@@ -81,7 +83,7 @@ export const InputIcon = styled.img`
   position: absolute;
   left: 2.74%;
   right: 91.23%;
-  top: 15.62%;
+  top: 14%;
   bottom: 15.62%;
   height: 22px;
   width: 22px;
@@ -90,6 +92,6 @@ export const InputIcon = styled.img`
 export const List = styled.li`
   position: relative;
   padding-left: ${(props) => (props.nav ? "2.6rem" : "3.8rem")};
-  margin-top: 1.5rem;
+  margin-top: ${(props) => (props.nav ? "0.6rem" : "1.5rem")};
   list-style: none;
 `;

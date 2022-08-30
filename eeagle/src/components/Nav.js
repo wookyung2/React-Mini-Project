@@ -37,7 +37,6 @@ const Nav = () => {
         dispatch(fetchArticle({ keyword: e.target.value, page: 1 }));
       } else alert("검색어를 입력해주세요");
     }, 500);
-    console.log(e.target.value);
     setValue(e.target.value);
   };
 
@@ -71,7 +70,7 @@ const Nav = () => {
       <InputDiv>
         <form onSubmit={handleSubmit}>
           <InputIcon src={SearchBtn}></InputIcon>
-          <Input
+          <input
             value={value}
             type="text"
             placeholder="Search..."
