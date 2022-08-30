@@ -30,12 +30,12 @@ const Nav = () => {
   //Change 핸들함수
   //검색어 입력후 0.5초동안 추가입력이 없을 시 fetchArticle 실행
   const handleChange = (e) => {
-    clearTimeout(timerId);
+    clearTimeout(timerId.current);
     timerId.current = setTimeout(() => {
       if (e.target.value) {
         dispatch(cleanUpArticles());
         dispatch(fetchArticle({ keyword: e.target.value, page: 1 }));
-      }
+      } else alert("검색어를 입력해주세요");
     }, 500);
     setValue(e.target.value);
   };
@@ -70,7 +70,7 @@ const Nav = () => {
       <InputDiv>
         <form onSubmit={handleSubmit}>
           <InputIcon src={SearchBtn}></InputIcon>
-          <Input
+          <input
             value={value}
             type="text"
             placeholder="Search..."
@@ -79,9 +79,16 @@ const Nav = () => {
             onBlur={onFocusout}
           />
         </form>
-        {/* <Dropdown>
-          <List>123</List>
-        </Dropdown> */}
+        {historyToggle && (
+          <Dropdown nav>
+            {keyword.map((word, i) => (
+              <List nav key={i}>
+                <InputIcon src={SearchBtn}></InputIcon>
+                {word}
+              </List>
+            ))}
+          </Dropdown>
+        )}
       </InputDiv>
 
       <Link to="/clip">

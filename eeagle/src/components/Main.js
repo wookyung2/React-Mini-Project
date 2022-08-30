@@ -21,7 +21,7 @@ export default function Main() {
   const [value, setValue] = useState("");
   const timerId = useRef(null);
   const dispatch = useDispatch();
-  const { keyword, page } = useSelector((state) => state.news);
+  const { keyword } = useSelector((state) => state.news);
   const [historyToggle, setHistoryToggle] = useState(false);
 
   //마지막 입력 후 0.5초 동안 아무입력 없으면 페이지 이동.
@@ -30,7 +30,7 @@ export default function Main() {
     clearTimeout(timerId.current);
     timerId.current = setTimeout(() => {
       if (e.target.value) {
-        navigate(`/search?q=${e.target.value}`);
+        navigate(`/search`);
         dispatch(cleanUpArticles());
         dispatch(fetchArticle({ keyword: e.target.value, page: 1 }));
       } else alert("검색어를 입력해주세요");
