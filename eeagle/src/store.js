@@ -1,5 +1,11 @@
-import {configureStore} from '@reduxjs/toolkit'
-import newsSlice from './redux-store/newsSlice'
+//store/index.js
+import {
+    combineReducers,
+    configureStore,
+    getDefaultMiddleware,
+} from "@reduxjs/toolkit";
+import searchReducer from "./redux/search";
+import logger from "redux-logger";
 import storage from "redux-persist/lib/storage"
 import {
   persistReducer,
@@ -17,13 +23,7 @@ const persistConfig = {
   storage,
   whiteList: ['news']
 }
-
-const reducer = combineReducers({
-  news: newsSlice,
-});
-
-const persistedReducer = persistReducer(persistConfig, reducer);
-
+const reducer = combineReducers({ searchReducer: searchReducer.reducer });
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>

@@ -1,44 +1,53 @@
 import LogoImage from "../img/Logo.svg";
 import SearchBtn from "../img/Search_btn.svg";
-import {
+import { 
   NavBar,
-  Logo,
-  InputDiv,
-  Button,
+  Logo, 
+  InputDiv, 
+  Button, 
+  Input, 
   InputIcon,
-  MainButton,
+  MainButton, 
   SearchButton,
-} from "../style/style";
-import { Dropdown, List } from "../style/mainStyle.js";
+  Dropdown,
+  List 
+}
+from "../style";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { useRef, useState } from "react";
-import {
-  keywordUpdate,
-  cleanUpArticles,
-  fetchArticle,
-} from "../redux-store/newsSlice";
+import { getList,clear,history,historyUpdate } from "../redux/search"
+import { HiOutlineSearch } from "react-icons/hi";
+import "./Main.scss";
 
 const Nav = () => {
-  const [value, setValue] = useState("");
-  const timerId = useRef(null);
-  const dispatch = useDispatch();
-  const { keyword, page } = useSelector((state) => state.news);
+  const [text, setText] = useState("");
   const [historyToggle, setHistoryToggle] = useState(false);
+  // 리렌더 초기화 방지
+  const checkText = useRef("");
+  const keywordList = useSelector((state) => state.searchReducer.keywords);
+  const dispatch = useDispatch();
 
-  //Change 핸들함수
-  //검색어 입력후 0.5초동안 추가입력이 없을 시 fetchArticle 실행
-  const handleChange = (e) => {
-    clearTimeout(timerId.current);
-    timerId.current = setTimeout(() => {
-      if (e.target.value) {
-        dispatch(cleanUpArticles());
-        dispatch(fetchArticle({ keyword: e.target.value, page: 1 }));
-      }
-    }, 500);
-    setValue(e.target.value);
+  // Submit 핸들함수 
+  // 바로전 키워드와 다르면 Articles를 cleanup하고,
+  // 그 후 keywordUpdate, fetchArticle 순차적으로 실행
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    // keywordList에 text가 존재하면
+    if(keywordList.some(keywordList => keywordList === text)) dispatch(historyUpdate(text))
+    else{
+      dispatch(history(text))
+    }
+    // 똑같은 단어 연속 검색 방지
+    if(text !== checkText.current) {
+        // 똑같은 단어 연속 검색이 아니면
+        checkText.current = text
+        dispatch(clear())
+        dispatch(getList({value : text, page : 1}))
+    }
   };
-
+  
   const onFocus = () => {
     setHistoryToggle(true);
   };
@@ -47,60 +56,38 @@ const Nav = () => {
     setHistoryToggle(false);
   };
 
-  // Submit 핸들함수
-  // 바로전 키워드와 다르면 Articles를 cleanup하고,
-  // 그 후 keywordUpdate, fetchArticle 순차적으로 실행
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (keyword[keyword.length - 1] !== value) {
-      dispatch(cleanUpArticles());
-      dispatch(fetchArticle({ keyword: value, page: 1 }));
-    } else dispatch(fetchArticle({ keyword: value, page: page }));
-
-    dispatch(keywordUpdate({ keyword: value }));
-    setValue("");
-  };
-
   return (
     <NavBar>
-      <Link to="/">
-        <Logo src={LogoImage}></Logo>
-      </Link>
+      <Link to="/"><Logo src={LogoImage}></Logo></Link>
       <InputDiv>
         <form onSubmit={handleSubmit}>
           <InputIcon src={SearchBtn}></InputIcon>
-          <input
-            value={value}
-            type="text"
-            placeholder="Search..."
-            onChange={handleChange}
-            onFocus={onFocus}
-            onBlur={onFocusout}
+          <Input 
+          value={text}
+          type="text"
+          placeholder="Search..."
+          onChange={(e) => setText(e.target.value)}
+          onFocus={onFocus}
+          onBlur={onFocusout}
           />
         </form>
         {historyToggle && (
-          <Dropdown nav>
-            {keyword.map((word, i) => (
-              <List nav key={i}>
-                <InputIcon src={SearchBtn}></InputIcon>
-                {word}
-              </List>
-            ))}
-          </Dropdown>
-        )}
+            <Dropdown nav> 
+              {[...keywordList].reverse().map((history, i) => (
+                <List nav key={i}>
+                  <InputIcon src={SearchBtn}></InputIcon>
+                  {history}
+                </List>
+              ))}
+            </Dropdown>
+          )}
       </InputDiv>
-
-      <Link to="/clip">
-        <Button type="submit">Clips</Button>
-      </Link>
-      <Link to="/">
-        <MainButton>Main</MainButton>
-      </Link>
-      <Link to="/search">
-        <SearchButton>Search</SearchButton>
-      </Link>
+        <Link to='/clip'><Button type='submit'>Clips</Button></Link>
+        <Link to='/'><MainButton>Main</MainButton></Link>
+        <Link to='/search'><SearchButton>Search</SearchButton></Link>
     </NavBar>
   );
 };
 
-export default Nav;
+
+export default Nav
