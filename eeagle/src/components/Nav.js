@@ -35,14 +35,6 @@ const Nav = ({showClip}) => {
     dispatch(clear())
     dispatch(getList({value : text, page : 1}))
   };
-  
-  const onFocus = () => {
-    setHistoryToggle(true);
-  };
-
-  const onFocusout = () => {
-    setHistoryToggle(false);
-  };
 
   return (
     <NavBar>
@@ -60,8 +52,8 @@ const Nav = ({showClip}) => {
               type="text"
               placeholder="Search..."
               onChange={(e) => setText(e.target.value)}
-              onFocus={onFocus}
-              onBlur={onFocusout}
+              onFocus={() => setHistoryToggle(!historyToggle)}
+              onBlur={() => setHistoryToggle(!historyToggle)}
             />
           </>
           )}
