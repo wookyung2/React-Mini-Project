@@ -1,87 +1,69 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from "axios";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  isLoading: false,
-  clippedId : [],
-  clipped : [],
-  articles: [],
-  keyword : [],
-  page: 1
-};
-
-// 검색한 키워드와 페이지 payload 객체로 받아서, fetch를 돌리는 비동기 액션
-export const fetchArticle = createAsyncThunk('news/fetchArticle', ({keyword,page}) => {
-  return fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${keyword}&page=${page}&api-key=vShxWUp7CoaBCrPHDrROH4wxeGZjOtJ7`)
-  .then((res) => res.json())
-  .catch((err) => console.log(err))
+export const getList = createAsyncThunk("search/getList", async ({value,page}) => {
+    console.log(`page : ${page}`)
+    const response = await axios
+    .get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${value}&page=${page}&sort=newest&api-key=QZ8zBBGvTq9MZzA36o2w9ktue4Kbi79u`)
+    return response.data;
 });
 
-const newsSlice = createSlice({
-  name: 'news',
-  initialState,
-  reducers:{
-    // clipToggle 클릭시, indexOf로 이미 들어가있는 기사인지 확인 진행 후
-    // 토글 기능 수행 
-    clipToggle: (state, action) => {
-      const articles = state.articles
-      if(state.clippedId.indexOf(action.payload.id) !== -1){
-        const index = state.clippedId.indexOf(action.payload.id);
-        state.clippedId.splice(index, 1)
-        state.clipped.splice(index, 1)
+const searchReducer = createSlice({
+  name: "searchArticle",
+  initialState: {
+    isLoading: false,
+    clipes : [],
+    articles: [],
+    keywords : [],
+  },
+  reducers: {
+    // clip 설정해주기
+    clip : (state,action) => {
+      // clipes에 새로 clip한 기사의 _id와 동등한 _id 값이 있으면
+      if(state.clipes.some(clip => clip._id === action.payload._id)){
+        // 제거해 주기
+        state.clipes = state.clipes.filter(( clip ) => clip._id !== action.payload._id );
       }
-      else{
-      const clippedArticle = articles.filter(article =>
-          article._id === action.payload.id)  
-      state.clippedId.push(action.payload.id);
-      state.clipped.push(...clippedArticle);
+      else {
+        // 없으면 추가
+        state.clipes.push(action.payload)
       }
     },
-
-    // fetch하게되는 키워드를 키워드를 푸시하는데 그전에
-    // 중복 및 배열 길이 검사를 통해 1차적으로 검사
-    keywordUpdate: (state, action)=> {
-      const newKeywords = state.keyword.filter(keyword => 
-        keyword !== action.payload.keyword
-      )
-      if(newKeywords.length === 5) newKeywords.shift();
-      newKeywords.push(action.payload.keyword);
-      state.keyword = newKeywords;
+    // keyword가 바뀌면 기존 article 초기화해주기
+    clear : (state) => {
+      state.articles =[]
     },
-    // 키워드가 변동되면 articles를 비워주고,
-    // clipped Articles로 채워준다.
-    // page를 1로 초기화 해준다. 
-    cleanUpArticles: (state, action)=> {
-      state.articles = [];
-      state.page = 1;
+    // keywords 동록
+    history : (state,action) => {
+      // 5개 이하이면 바로 push
+      if(state.keywords.length < 5) state.keywords.push(action.payload)
+      // 5개가 넘으면 첫 번째 값 제거하고 push
+      else {
+        state.keywords.shift()
+        state.keywords.push(action.payload)
+      }
     },
-  }, 
-  extraReducers:{
-    // fetch 진행중일때 isLoading을 true로 만들어서 다른 fetch는 안받게끔
-    [fetchArticle.pending]: (state, action) => {
-      state.isLoading = true;
+    // 똑같은 keywords가 input 되면 기존의 값 삭제해 주고, 새로 push 해주기
+    historyUpdate : (state,action) => {
+      state.keywords = state.keywords.filter((element) => element !== action.payload)
+      state.keywords.push(action.payload)
+    }
+  },
+  extraReducers: {
+    [getList.pending]: (state, { payload }) => {
+      state.isLoading = true
     },
-    // fetch가 성공적으로 진행되면 isLoading을 false로 해주고,
-    // clipped Articles에 이미 클립된 기사라면 push하지 않고
-    // 나머지는 다 넣어준다. 
-    [fetchArticle.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      const articles = action.payload.response.docs
-      articles.map((article) => {
-        if(state.clippedId.indexOf(article._id) === -1)
-        state.articles.push(article)
+    [getList.fulfilled]: (state, { payload }) => {
+      state.isLoading = false
+      payload.response.docs.map((e) => {
+          state.articles.push(e)
       })
-      state.page = state.page + 1
-      console.log(state.page);
     },
-    // fetch 실패시 isLoading만 일단 false로 만들어줌 
-    [fetchArticle.rejected]: (state) => {
-      state.isLoading = false;
+    [getList.rejected]: (state, { payload }) => {
+      state.isLoading = false
     },
-  }
-})
+  },
+});
 
-
-
-
-export const { clipToggle, keywordUpdate, cleanUpArticles } = newsSlice.actions;
-export default newsSlice.reducer;
+export default searchReducer
+export const {clip,clear,history,historyUpdate} = searchReducer.actions

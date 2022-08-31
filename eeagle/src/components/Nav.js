@@ -14,58 +14,43 @@ import {
 } from "../style/style";
 import { Dropdown, List } from "../style/mainStyle.js";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import {
-  keywordUpdate,
-  cleanUpArticles,
-  fetchArticle,
+  getList,
+  clear,
+  history,
+  historyUpdate,
 } from "../redux-store/newsSlice";
 
 const Nav = () => {
-  const [value, setValue] = useState(
-    useSelector((state) => state.news.keyword.at(-1))
-  );
-  const timerId = useRef(null);
-  const dispatch = useDispatch();
-  const keyword = useSelector((state) => state.news.keyword);
-  const page = useSelector((state) => state.news.page);
+  const keywordList = useSelector((state) => state.searchReducer.keywords);
   const [historyToggle, setHistoryToggle] = useState(false);
-
-  //Change 핸들함수
-  //검색어 입력후 0.5초동안 추가입력이 없을 시 fetchArticle 실행
-  const handleChange = (e) => {
-    setValue(e.target.value);
-    clearTimeout(timerId.current);
-    timerId.current = setTimeout(() => {
-      if (e.target.value) {
-        dispatch(cleanUpArticles());
-        dispatch(fetchArticle({ keyword: e.target.value, page: 1 }));
-      }
-    }, 500);
-  };
-
-  const onFocus = () => {
-    setHistoryToggle(true);
-    setValue("");
-  };
-
-  const onFocusout = () => {
-    setHistoryToggle(false);
-  };
+  const [text, setText] = useState(keywordList.at(-1));
+  const dispatch = useDispatch();
 
   // Submit 핸들함수
   // 바로전 키워드와 다르면 Articles를 cleanup하고,
   // 그 후 keywordUpdate, fetchArticle 순차적으로 실행
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (keyword[keyword.length - 1] !== value) {
-      dispatch(cleanUpArticles());
-      dispatch(fetchArticle({ keyword: value, page: 1 }));
-    } else dispatch(fetchArticle({ keyword: value, page: page }));
 
-    dispatch(keywordUpdate({ keyword: value }));
-    setValue("");
+    // keywordList에 text가 존재하면
+    if (keywordList.some((keywordList) => keywordList === text))
+      dispatch(historyUpdate(text));
+    else {
+      dispatch(history(text));
+    }
+    dispatch(clear());
+    dispatch(getList({ value: text, page: 1 }));
+  };
+
+  const onFocus = () => {
+    setHistoryToggle(true);
+  };
+
+  const onFocusout = () => {
+    setHistoryToggle(false);
   };
 
   return (
@@ -77,20 +62,20 @@ const Nav = () => {
         <form onSubmit={handleSubmit}>
           <InputIcon src={SearchBtn}></InputIcon>
           <Input
-            value={value}
+            value={text}
             type="text"
             placeholder="Search..."
-            onChange={handleChange}
+            onChange={(e) => setText(e.target.value)}
             onFocus={onFocus}
             onBlur={onFocusout}
           />
         </form>
         {historyToggle && (
           <Dropdown nav>
-            {keyword.map((word, i) => (
+            {[...keywordList].reverse().map((history, i) => (
               <List nav key={i}>
                 <InputIcon src={SearchBtn}></InputIcon>
-                {word}
+                {history}
               </List>
             ))}
           </Dropdown>
