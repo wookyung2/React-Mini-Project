@@ -8,6 +8,7 @@ import {
   keywordUpdate,
 } from "../redux-store/newsSlice.js";
 import {
+  Input,
   Dropdown,
   List,
   Logo,
@@ -21,22 +22,22 @@ export default function Main() {
   const [value, setValue] = useState("");
   const timerId = useRef(null);
   const dispatch = useDispatch();
-  const { keyword } = useSelector((state) => state.news);
+  const keyword = useSelector((state) => state.news.keyword);
   const [historyToggle, setHistoryToggle] = useState(false);
 
   //마지막 입력 후 0.5초 동안 아무입력 없으면 페이지 이동.
 
   const onChange = (e) => {
+    setValue(e.target.value);
     clearTimeout(timerId.current);
     timerId.current = setTimeout(() => {
       if (e.target.value) {
-        navigate(`/search`);
         dispatch(cleanUpArticles());
+        dispatch(keywordUpdate({ keyword: e.target.value }));
         dispatch(fetchArticle({ keyword: e.target.value, page: 1 }));
+        navigate(`/search`);
       } else alert("검색어를 입력해주세요");
     }, 500);
-
-    setValue(e.target.value);
   };
   // Focus에 따라 DropDown on/off
   const onFocus = () => {
@@ -51,9 +52,9 @@ export default function Main() {
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(keywordUpdate({ keyword: value }));
-    // navigate(`/search?q=${e.target.value}`);
-    // dispatch(cleanUpArticles());
-    // dispatch(fetchArticle({ keyword: e.target.value, page: 1 }));
+    dispatch(cleanUpArticles());
+    dispatch(fetchArticle({ keyword: value, page: 1 }));
+    navigate(`/search`);
   };
 
   return (
@@ -69,7 +70,7 @@ export default function Main() {
           <form onSubmit={onSubmit}>
             <Logo>Eeagle</Logo>
             <HiOutlineSearch className="SearchIcon" />
-            <input
+            <Input
               value={value}
               type="text"
               placeholder="Search.."

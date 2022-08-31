@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-const LightGrey = "#9e9e9e";
-
 export const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -14,21 +12,6 @@ export const SearchForm = styled.div`
   position: relative;
   width: 57.2rem;
   top: 5rem;
-  input {
-    font-size: 1.8rem;
-    padding-left: 3.8rem;
-    width: 100%;
-    height: 4rem;
-
-    box-sizing: border-box;
-    border-radius: 2rem;
-    border: 0.1rem solid ${LightGrey};
-
-    &:focus {
-      outline: ${LightGrey};
-      border-radius: 2rem 2rem 0 0;
-    }
-  }
 
   .SearchIcon {
     position: absolute;
@@ -37,8 +20,24 @@ export const SearchForm = styled.div`
     left: 1.6rem;
     font-size: 1.7rem;
     z-index: 1;
-    color: ${LightGrey};
+    color: #9e9e9e;
     transform: translateY(-50%);
+  }
+`;
+
+export const Input = styled.input`
+  font-size: 1.8rem;
+  padding-left: 3.8rem;
+  width: 100%;
+  height: 4rem;
+
+  box-sizing: border-box;
+  border-radius: 2rem;
+  border: 0.1rem solid #9e9e9e;
+
+  &:focus {
+    outline: #9e9e9e;
+    border-radius: 2rem 2rem 0 0;
   }
 `;
 
@@ -51,23 +50,26 @@ export const Logo = styled.h1`
 `;
 
 export const Dropdown = styled.ul`
+  ${(props) =>
+    props.nav
+      ? `font-size: 1rem;
+        font-weight: 400;
+        top: 2rem`
+      : `font-size: 1.8rem;
+        font-weight: null;
+        top: null`};
   position: absolute;
-
-  font-size: ${(props) => (props.nav ? "1rem" : "1.8rem")};
-  font-weight: ${(props) => (props.nav ? "400" : null)};
-  top: ${(props) => (props.nav ? "2rem" : null)};
-
   width: 100%;
   padding: 0;
   padding-bottom: 1rem;
   margin: 0;
 
   border-radius: 0 0 2rem 2rem;
-  border: 0.1rem solid ${LightGrey};
+  border: 0.1rem solid #9e9e9e;
   border-top: none;
   box-sizing: border-box;
   background-color: white;
-  color: ${LightGrey};
+  color: #9e9e9e;
 
   .ListIcon {
     position: absolute;
@@ -75,7 +77,7 @@ export const Dropdown = styled.ul`
     left: 1.6rem;
     font-size: 1.7rem;
     z-index: 1;
-    color: ${LightGrey};
+    color: #9e9e9e;
   }
 `;
 
@@ -90,8 +92,13 @@ export const InputIcon = styled.img`
 `;
 
 export const List = styled.li`
+  ${(props) =>
+    props.nav
+      ? `padding-left: 2.6rem;
+        margin-top: 0.6rem`
+      : `padding-left: 3.8rem;
+        margin-top: 1.5rem`};
+
   position: relative;
-  padding-left: ${(props) => (props.nav ? "2.6rem" : "3.8rem")};
-  margin-top: ${(props) => (props.nav ? "0.6rem" : "1.5rem")};
   list-style: none;
 `;

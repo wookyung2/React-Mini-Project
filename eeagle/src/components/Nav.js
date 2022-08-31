@@ -1,6 +1,7 @@
 import LogoImage from "../img/Logo.svg";
 import SearchBtn from "../img/Search_btn.svg";
 import {
+  Input,
   NavBar,
   Logo,
   InputDiv,
@@ -8,6 +9,8 @@ import {
   InputIcon,
   MainButton,
   SearchButton,
+  Buttons,
+  Div,
 } from "../style/style";
 import { Dropdown, List } from "../style/mainStyle.js";
 import { Link } from "react-router-dom";
@@ -20,15 +23,19 @@ import {
 } from "../redux-store/newsSlice";
 
 const Nav = () => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(
+    useSelector((state) => state.news.keyword.at(-1))
+  );
   const timerId = useRef(null);
   const dispatch = useDispatch();
-  const { keyword, page } = useSelector((state) => state.news);
+  const keyword = useSelector((state) => state.news.keyword);
+  const page = useSelector((state) => state.news.page);
   const [historyToggle, setHistoryToggle] = useState(false);
 
   //Change 핸들함수
   //검색어 입력후 0.5초동안 추가입력이 없을 시 fetchArticle 실행
   const handleChange = (e) => {
+    setValue(e.target.value);
     clearTimeout(timerId.current);
     timerId.current = setTimeout(() => {
       if (e.target.value) {
@@ -36,11 +43,11 @@ const Nav = () => {
         dispatch(fetchArticle({ keyword: e.target.value, page: 1 }));
       }
     }, 500);
-    setValue(e.target.value);
   };
 
   const onFocus = () => {
     setHistoryToggle(true);
+    setValue("");
   };
 
   const onFocusout = () => {
@@ -69,7 +76,7 @@ const Nav = () => {
       <InputDiv>
         <form onSubmit={handleSubmit}>
           <InputIcon src={SearchBtn}></InputIcon>
-          <input
+          <Input
             value={value}
             type="text"
             placeholder="Search..."
@@ -93,9 +100,11 @@ const Nav = () => {
       <Link to="/clip">
         <Button type="submit">Clips</Button>
       </Link>
+
       <Link to="/">
         <MainButton>Main</MainButton>
       </Link>
+
       <Link to="/search">
         <SearchButton>Search</SearchButton>
       </Link>
