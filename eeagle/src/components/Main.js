@@ -2,8 +2,8 @@ import React, { useRef, useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { getList,clear,history, historyUpdate } from "../redux/search"
 import {
+  Input,
   Dropdown,
   List,
   Logo,
@@ -11,6 +11,7 @@ import {
   SearchForm,
 } from "../style/mainStyle.js";
 import { Button, NavBar } from "../style/style.js";
+import { getList, clear, history, historyUpdate } from "../redux-store/newsSlice"
 
 export default function Main() {
   const navigate = useNavigate();
@@ -18,7 +19,6 @@ export default function Main() {
   const [text, setText] = useState("");
   const [historyToggle, setHistoryToggle] = useState(false);
   const timerId = useRef(null);
-  const checkText = useRef("");
   const keywordList = useSelector((state) => state.searchReducer.keywords);
 
   //마지막 입력 후 1.5 초 동안 아무입력 없으면 페이지 이동한다.
@@ -30,13 +30,8 @@ export default function Main() {
         else{
           dispatch(history(e.target.value))
         }
-
-        if(text !== checkText.current) {
-          checkText.current = text
-          dispatch(clear())
-          dispatch(getList({value : e.target.value, page : 1}))
-        }
-        
+        dispatch(clear())
+        dispatch(getList({value : e.target.value, page : 1}))
         navigate(`/search?q=${e.target.value}`);
       } else alert("검색어를 입력해주세요");
     }, 1500);
@@ -63,8 +58,8 @@ export default function Main() {
           <form>
             <Logo>Eeagle</Logo>
             <HiOutlineSearch className="SearchIcon" />
-            <input
-              value={value}
+            <Input
+              value={text}
               type="text"
               placeholder="Search.."
               onChange={onChange}
@@ -73,14 +68,14 @@ export default function Main() {
             />
           </form>
           {historyToggle && (
-              <Dropdown> 
-                {[...keywordList].reverse().map((history, i) => (
-                  <List key={i}>
-                    <HiOutlineSearch className="search-icon" />
-                    {history}
-                  </List>
-                ))}
-              </Dropdown>
+            <Dropdown>
+              {[...keywordList].reverse().map((history, i) => (
+                <List key={i}>
+                  <HiOutlineSearch className="search-icon" />
+                  {history}
+                </List>
+              ))}
+            </Dropdown>
           )}
         </SearchForm>
       </SearchContainer>

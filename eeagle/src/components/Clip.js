@@ -1,49 +1,18 @@
 import React from "react";
-import clipmark from "../img/clipmark.svg";
-import { clip } from "../redux/search";
 import Nav from "./Nav";
-import {
-  ListContanier,
-  ListDiv,
-  Title,
-  ATag,
-  ClipIcon,
-  Content,
-} from "../style";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import Article from "./Article";
+import { ListContanier } from "../style/style";
 
 const Clip = () => {
   const clippedList = useSelector((state) => state.searchReducer.clipes);
-  const dispatch = useDispatch();
 
   return (
     <>
-      <Nav/>
+      <Nav />
       <ListContanier>
-        {clippedList.map((ele) =>
-         <ListDiv key={ele._id}>
-         <Title>
-           {/*타이틀 클릭시 새창으로 이동*/}
-           <ATag
-             href={ele.web_url}
-             target="_blank"
-             rel="noreferrer"
-             title="Detail view"
-           >
-             {ele.headline.main}
-           </ATag>
-           <ClipIcon
-             src={clipmark}
-             alt="clipicon"
-             onClick={() => dispatch(clip(ele))}
-           ></ClipIcon>
-         </Title>
-         <Content>{ele.snippet}</Content>
-         <Content>{`${ele.pub_date.substr(0, 4)}.${ele.pub_date.substr(
-              5,
-              2
-            )}.${ele.pub_date.substr(8, 2)}`}</Content>
-       </ListDiv>
+        {clippedList.map((ele) => 
+        <Article ele={ele}/>
         )}
       </ListContanier>
     </>

@@ -1,11 +1,5 @@
-//store/index.js
-import {
-    combineReducers,
-    configureStore,
-    getDefaultMiddleware,
-} from "@reduxjs/toolkit";
-import searchReducer from "./redux/search";
-import logger from "redux-logger";
+import {configureStore} from '@reduxjs/toolkit'
+import searchReducer from './redux-store/newsSlice'
 import storage from "redux-persist/lib/storage"
 import {
   persistReducer,
@@ -16,6 +10,7 @@ import {
   PURGE,
   REGISTER,} from "redux-persist"
 import {combineReducers} from 'redux'
+import logger from "redux-logger"
 
 const persistConfig = {
   key: "root",
@@ -23,7 +18,13 @@ const persistConfig = {
   storage,
   whiteList: ['news']
 }
-const reducer = combineReducers({ searchReducer: searchReducer.reducer });
+
+const reducer = combineReducers({
+  searchReducer: searchReducer.reducer
+});
+
+const persistedReducer = persistReducer(persistConfig, reducer);
+
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
@@ -31,5 +32,5 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    },logger),
 });
