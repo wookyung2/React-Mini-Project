@@ -28,7 +28,6 @@ export default function Main() {
 
   //마지막 입력 후 1.5 초 동안 아무입력 없으면 페이지 이동한다.
   const onChange = (e) => {
-    setValue(e.target.value);
     clearTimeout(timerId.current);
     timerId.current = setTimeout(() => {
       if (e.target.value) {
@@ -45,6 +44,17 @@ export default function Main() {
     setText(e.target.value);
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/search?q=${text}`);
+    if (keywordList.some((keywordList) => keywordList === text))
+      dispatch(historyUpdate(text));
+    else {
+      dispatch(history(text));
+    }
+    dispatch(clear());
+    dispatch(getList({ value: text, page: 1 }));
+  };
 
   return (
     <>
@@ -55,7 +65,7 @@ export default function Main() {
       </NavBar>
       <SearchContainer>
         <SearchForm>
-          <form>
+          <form onSubmit={onSubmit}>
             <Logo>Eeagle</Logo>
             <HiOutlineSearch className="SearchIcon" />
             <Input
