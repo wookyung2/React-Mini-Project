@@ -50,7 +50,7 @@ export default function Main() {
     <>
       <NavBar>
         <Link to="/clip">
-          <Button type="submit">Clips</Button>
+          <Button type="submit">Show Clip</Button>
         </Link>
       </NavBar>
       <SearchContainer>
@@ -71,7 +71,7 @@ export default function Main() {
             <Dropdown>
               {[...keywordList].reverse().map((history, i) => (
                 <List key={i}>
-                  <HiOutlineSearch className="search-icon" />
+                  <HiOutlineSearch className="ListIcon" />
                   {history}
                 </List>
               ))}

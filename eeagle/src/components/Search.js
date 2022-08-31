@@ -31,7 +31,7 @@ function Search() {
 
   return (
     <>
-      <Nav />
+      <Nav showClip={false}/>
       <ListContanier>
         {console.log(articleList)}
         {articleList.map((ele) => 

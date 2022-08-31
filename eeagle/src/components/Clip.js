@@ -6,13 +6,13 @@ import { ListContanier } from "../style/style";
 
 const Clip = () => {
   const clippedList = useSelector((state) => state.searchReducer.clipes);
-
+  
   return (
     <>
-      <Nav />
+      <Nav showClip={true}/>
       <ListContanier>
         {clippedList.map((ele) => 
-        <Article ele={ele}/>
+        <Article ele={ele} key={ele._id}/>
         )}
       </ListContanier>
     </>
