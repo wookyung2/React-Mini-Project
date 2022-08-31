@@ -58,6 +58,10 @@ export const InputDiv = styled.div`
   width: 365px;
   top: 28px;
   left: 220px;
+  &:focus {
+    outline: #9e9e9e;
+    border-radius: 20px 20px 0 0;
+  }
 `;
 
 export const Input = styled.input`
@@ -69,7 +73,6 @@ export const Input = styled.input`
   box-sizing: border-box;
   border-radius: 20px;
   border: 0.1rem solid #9e9e9e;
-
   &:focus {
     outline: #9e9e9e;
     border-radius: 20px 20px 0 0;
@@ -84,11 +87,6 @@ export const InputIcon = styled.img`
   bottom: 15.62%;
   height: 22px;
   width: 22px;
-`;
-
-export const Buttons = styled.div`
-  display: flex;
-  flex-direction: column;
 `;
 
 export const Button = styled.button`
@@ -114,6 +112,11 @@ export const Button = styled.button`
   font-size: 14px;
   line-height: 100%;
   color: #eeeeee;
+`;
+
+export const Buttons = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 export const SearchButton = styled.button`
