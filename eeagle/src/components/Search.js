@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getList } from "../redux-store/newsSlice";
 import { ListContanier } from "../style/style";
 import { useInView } from 'react-intersection-observer';
+import Loading from "../style/Loading";
 
 function Search() {
   const dispatch = useDispatch()
@@ -12,6 +13,7 @@ function Search() {
   const checkPage = useRef(1);
 
   const articleList = useSelector((state) => state.searchReducer.articles);
+  const isLoading = useSelector((state) => state.searchReducer.isLoading);
 
   // 새로운 키워드로 검색하면 checkPage.current 1로 초기화
   if(articleList.length <= 10) checkPage.current = 1
@@ -24,6 +26,9 @@ function Search() {
       }
   },[inView]);
 
+
+
+
   return (
     <>
       <Nav />
@@ -34,6 +39,7 @@ function Search() {
         )}
         <div ref={ref} />
       </ListContanier>
+      {isLoading && <Loading />}
     </>
   );
 }
