@@ -1,6 +1,7 @@
 import LogoImage from "../img/Logo.svg";
 import SearchBtn from "../img/Search_btn.svg";
 import {
+  Input,
   NavBar,
   Logo,
   InputDiv,
@@ -8,6 +9,8 @@ import {
   InputIcon,
   MainButton,
   SearchButton,
+  Buttons,
+  Div,
 } from "../style/style";
 import { Dropdown, List } from "../style/mainStyle.js";
 import { Link } from "react-router-dom";
@@ -73,7 +76,7 @@ const Nav = () => {
       <InputDiv>
         <form onSubmit={handleSubmit}>
           <InputIcon src={SearchBtn}></InputIcon>
-          <input
+          <Input
             value={value}
             type="text"
             placeholder="Search..."
@@ -97,9 +100,11 @@ const Nav = () => {
       <Link to="/clip">
         <Button type="submit">Clips</Button>
       </Link>
+
       <Link to="/">
         <MainButton>Main</MainButton>
       </Link>
+
       <Link to="/search">
         <SearchButton>Search</SearchButton>
       </Link>

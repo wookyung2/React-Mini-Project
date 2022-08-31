@@ -58,47 +58,23 @@ export const InputDiv = styled.div`
   width: 365px;
   top: 28px;
   left: 220px;
-  input {
-    padding-left: 38px;
-    font-size: 14px;
-    width: 100%;
-    height: 32px;
-    color: #9e9e9e;
-    box-sizing: border-box;
-    border-radius: 20px;
-    border: 0.1rem solid #9e9e9e;
-
-    &:focus {
-      outline: #9e9e9e;
-      border-radius: 20px 20px 0 0;
-    }
-  }
 `;
 
-// export const InputDiv = styled.div`
-//   position: absolute;
-//   width: 365px;
-//   font-weight: 400;
-//   font-size: 14px;
-//   line-height: 17px;
-//   color: #9e9e9e;
+export const Input = styled.input`
+  padding-left: 38px;
+  font-size: 14px;
+  width: 100%;
+  height: 32px;
+  color: #9e9e9e;
+  box-sizing: border-box;
+  border-radius: 20px;
+  border: 0.1rem solid #9e9e9e;
 
-//   height: 32px;
-//   left: 240px;
-//   right: 835px;
-//   top: 24px;
-
-//   border: 1px solid #9e9e9e;
-//   border-radius: 20px;
-
-//   :focus-within {
-//     outline: #9e9e9e;
-//     border-radius: 20px 20px 0 0;
-//   }
-//   button {
-//     visibility: hidden;
-//   }
-// `;
+  &:focus {
+    outline: #9e9e9e;
+    border-radius: 20px 20px 0 0;
+  }
+`;
 
 export const InputIcon = styled.img`
   position: absolute;
@@ -110,23 +86,10 @@ export const InputIcon = styled.img`
   width: 22px;
 `;
 
-// export const Input = styled.input`
-//   border: none;
-//   position: absolute;
-//   left: 10.96%;
-//   right: 74.25%;
-//   top: 21.88%;
-//   bottom: 25%;
-//   width: 300px;
-
-//   :focus {
-//     outline: none;
-//   }
-
-//   &:focus::placeholder {
-//     color: transparent;
-//   }
-// `;
+export const Buttons = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 export const Button = styled.button`
   display: flex;

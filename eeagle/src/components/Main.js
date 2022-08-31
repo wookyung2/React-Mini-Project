@@ -8,6 +8,7 @@ import {
   keywordUpdate,
 } from "../redux-store/newsSlice.js";
 import {
+  Input,
   Dropdown,
   List,
   Logo,
@@ -69,7 +70,7 @@ export default function Main() {
           <form onSubmit={onSubmit}>
             <Logo>Eeagle</Logo>
             <HiOutlineSearch className="SearchIcon" />
-            <input
+            <Input
               value={value}
               type="text"
               placeholder="Search.."
