@@ -7,10 +7,6 @@ import {
   InputDiv,
   Button,
   InputIcon,
-  MainButton,
-  SearchButton,
-  Buttons,
-  Div,
 } from "../style/style";
 import { Dropdown, List } from "../style/mainStyle.js";
 import { Link } from "react-router-dom";
@@ -23,7 +19,7 @@ import {
   historyUpdate,
 } from "../redux-store/newsSlice";
 
-const Nav = () => {
+const Nav = ({ showClip }) => {
   const keywordList = useSelector((state) => state.searchReducer.keywords);
   const [historyToggle, setHistoryToggle] = useState(false);
   const [text, setText] = useState(keywordList.at(-1));
@@ -45,14 +41,6 @@ const Nav = () => {
     dispatch(getList({ value: text, page: 1 }));
   };
 
-  const onFocus = () => {
-    setHistoryToggle(true);
-  };
-
-  const onFocusout = () => {
-    setHistoryToggle(false);
-  };
-
   return (
     <NavBar>
       <Link to="/">
@@ -60,15 +48,19 @@ const Nav = () => {
       </Link>
       <InputDiv>
         <form onSubmit={handleSubmit}>
-          <InputIcon src={SearchBtn}></InputIcon>
-          <Input
-            value={text}
-            type="text"
-            placeholder="Search..."
-            onChange={(e) => setText(e.target.value)}
-            onFocus={onFocus}
-            onBlur={onFocusout}
-          />
+          {!showClip && (
+            <>
+              <InputIcon src={SearchBtn}></InputIcon>
+              <Input
+                value={text}
+                type="text"
+                placeholder="Search..."
+                onChange={(e) => setText(e.target.value)}
+                onFocus={() => setHistoryToggle(!historyToggle)}
+                onBlur={() => setHistoryToggle(!historyToggle)}
+              />
+            </>
+          )}
         </form>
         {historyToggle && (
           <Dropdown nav>
@@ -81,17 +73,8 @@ const Nav = () => {
           </Dropdown>
         )}
       </InputDiv>
-
-      <Link to="/clip">
-        <Button type="submit">Clips</Button>
-      </Link>
-
-      <Link to="/">
-        <MainButton>Main</MainButton>
-      </Link>
-
-      <Link to="/search">
-        <SearchButton>Search</SearchButton>
+      <Link to={showClip ? `/search?q=${keywordList.at(-1)}` : "/clip"}>
+        <Button type="button">{showClip ? "Show All" : "Show Clip"}</Button>
       </Link>
     </NavBar>
   );

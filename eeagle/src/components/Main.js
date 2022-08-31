@@ -45,19 +45,12 @@ export default function Main() {
     setText(e.target.value);
   };
 
-  const onFocus = () => {
-    setHistoryToggle(true);
-  };
-
-  const onFocusout = () => {
-    setHistoryToggle(false);
-  };
 
   return (
     <>
       <NavBar>
         <Link to="/clip">
-          <Button type="submit">Clips</Button>
+          <Button type="submit">Show Clip</Button>
         </Link>
       </NavBar>
       <SearchContainer>
@@ -70,15 +63,15 @@ export default function Main() {
               type="text"
               placeholder="Search.."
               onChange={onChange}
-              onFocus={onFocus}
-              onBlur={onFocusout}
+              onFocus={() => setHistoryToggle(!historyToggle)}
+              onBlur={() => setHistoryToggle(!historyToggle)}
             />
           </form>
           {historyToggle && (
             <Dropdown>
               {[...keywordList].reverse().map((history, i) => (
                 <List key={i}>
-                  <HiOutlineSearch className="search-icon" />
+                  <HiOutlineSearch className="ListIcon" />
                   {history}
                 </List>
               ))}
