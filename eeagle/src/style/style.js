@@ -94,7 +94,7 @@ export const Button = styled.button`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0px;
+  padding: 15px;
   gap: 8px;
 
   position: absolute;
@@ -113,58 +113,9 @@ export const Button = styled.button`
   line-height: 100%;
   color: #eeeeee;
 `;
+<<<<<<< HEAD
 
 export const Buttons = styled.div`
    display: flex;
    flex-direction: column;
  `;
-
-export const SearchButton = styled.button`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0px;
-  gap: 8px;
-
-  position: absolute;
-  width: 70px;
-  height: 40px;
-  right: 200px;
-  top: 20px;
-
-  background: #0c2d6d;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 100%;
-  color: #eeeeee;
-`;
-
-export const MainButton = styled.button`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0px;
-  gap: 8px;
-
-  position: absolute;
-  width: 70px;
-  height: 40px;
-  right: 280px;
-  top: 20px;
-
-  background: #0c2d6d;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 100%;
-  color: #eeeeee;
-`;
