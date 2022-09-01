@@ -11,12 +11,11 @@ function Search() {
   const dispatch = useDispatch()
   const [ref, inView] = useInView();
   const checkPage = useRef(1);
-
   const articleList = useSelector((state) => state.searchReducer.articles);
   const isLoading = useSelector((state) => state.searchReducer.isLoading);
 
   // 새로운 키워드로 검색하면 checkPage.current 1로 초기화
-  if(articleList.length <= 10) checkPage.current = 1
+  if(articleList.length < 10) checkPage.current = 1
 
   // 무한 스크롤 page 1 증가
   useEffect(()=>{
@@ -26,14 +25,10 @@ function Search() {
       }
   },[inView]);
 
-
-
-
   return (
     <>
       <Nav showClip={false}/>
       <ListContanier>
-        {console.log(articleList)}
         {articleList.map((ele) => 
           <Article ele={ele}/>
         )}
