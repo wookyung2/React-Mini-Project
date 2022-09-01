@@ -12,7 +12,6 @@ export const SearchForm = styled.div`
   position: relative;
   width: 40rem;
   top: 3rem;
-
   .SearchIcon {
     position: absolute;
     top: 4.8rem;
