@@ -25,9 +25,8 @@ function Search() {
     <>
       <Nav showClip={false} />
       <ListContanier>
-        {console.log(articleList)}
         {articleList.map((ele) => (
-          <Article ele={ele} />
+          <Article key={ele._id} ele={ele} />
         ))}
         <div ref={ref} />
       </ListContanier>
