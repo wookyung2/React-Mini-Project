@@ -79,16 +79,6 @@ export const Dropdown = styled.ul`
   }
 `;
 
-export const InputIcon = styled.img`
-  position: absolute;
-  left: 2.74%;
-  right: 91.23%;
-  top: 8%;
-  bottom: 15.62%;
-  height: 22px;
-  width: 22px;
-`;
-
 export const List = styled.li`
   ${(props) =>
     props.nav

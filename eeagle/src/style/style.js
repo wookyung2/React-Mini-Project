@@ -114,9 +114,3 @@ export const Button = styled.button`
   line-height: 100%;
   color: #eeeeee;
 `;
-<<<<<<< HEAD
-
-export const Buttons = styled.div`
-   display: flex;
-   flex-direction: column;
- `;
