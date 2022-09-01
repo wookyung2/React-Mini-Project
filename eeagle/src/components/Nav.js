@@ -9,31 +9,38 @@ import {
   InputIcon,
 } from "../style/style";
 import { Dropdown, List } from "../style/mainStyle.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { getList, clear, history, historyUpdate } from "../redux-store/newsSlice"
+import {
+  getList,
+  clear,
+  history,
+  historyUpdate,
+} from "../redux-store/newsSlice";
 
-const Nav = ({showClip}) => {
-  
+const Nav = ({ showClip }) => {
+  const navigate = useNavigate();
   const keywordList = useSelector((state) => state.searchReducer.keywords);
   const [historyToggle, setHistoryToggle] = useState(false);
   const [text, setText] = useState(keywordList.at(-1));
   const dispatch = useDispatch();
 
-  // Submit 핸들함수 
+  // Submit 핸들함수
   // 바로전 키워드와 다르면 Articles를 cleanup하고,
   // 그 후 keywordUpdate, fetchArticle 순차적으로 실행
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     // keywordList에 text가 존재하면
-    if(keywordList.some(keywordList => keywordList === text)) dispatch(historyUpdate(text))
-    else{
-      dispatch(history(text))
+    if (keywordList.some((keywordList) => keywordList === text))
+      dispatch(historyUpdate(text));
+    else {
+      dispatch(history(text));
     }
-    dispatch(clear())
-    dispatch(getList({value : text, page : 1}))
+    dispatch(clear());
+    dispatch(getList({ value: text, page: 1 }));
+    navigate(`/search?q=${text}`);
   };
 
   return (
@@ -43,38 +50,35 @@ const Nav = ({showClip}) => {
       </Link>
       <InputDiv>
         <form onSubmit={handleSubmit}>
-          {!showClip && 
-          (
-          <>
-            <InputIcon src={SearchBtn}></InputIcon>
-            <Input
-              value={text}
-              type="text"
-              placeholder="Search..."
-              onChange={(e) => setText(e.target.value)}
-              onFocus={() => setHistoryToggle(!historyToggle)}
-              onBlur={() => setHistoryToggle(!historyToggle)}
-            />
-          </>
+          {!showClip && (
+            <>
+              <InputIcon src={SearchBtn}></InputIcon>
+              <Input
+                value={text}
+                type="text"
+                placeholder="Search..."
+                onChange={(e) => setText(e.target.value)}
+                onFocus={() => setHistoryToggle(!historyToggle)}
+                onBlur={() => setHistoryToggle(!historyToggle)}
+              />
+            </>
           )}
         </form>
         {historyToggle && (
           <Dropdown nav>
-              {[...keywordList].reverse().map((history, i) => (
-                <List nav key={i}>
-                  <InputIcon src={SearchBtn}></InputIcon>
-                  {history}
-                </List>
-              ))}
+            {[...keywordList].reverse().map((history, i) => (
+              <List nav key={i}>
+                <InputIcon src={SearchBtn}></InputIcon>
+                {history.length > 35
+                  ? `${history.substring(0, 35)}...`
+                  : history}
+              </List>
+            ))}
           </Dropdown>
         )}
       </InputDiv>
-      <Link  
-        to={showClip ? `/search?q=${keywordList.at(-1)}` 
-                     : "/clip"}>
-        <Button type="button">
-          {showClip ? "Show All" : "Show Clip"}
-        </Button>
+      <Link to={showClip ? `/search?q=${keywordList.at(-1)}` : "/clip"}>
+        <Button type="button">{showClip ? "Show All" : "Show Clip"}</Button>
       </Link>
     </NavBar>
   );

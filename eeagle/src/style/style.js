@@ -25,6 +25,7 @@ export const ATag = styled.a`
 export const ClipIcon = styled.img`
   height: 16px;
   margin: 0 13px;
+  cursor: pointer;
 `;
 export const Content = styled.div`
   font-size: 16px;
@@ -60,24 +61,24 @@ export const InputDiv = styled.div`
   left: 220px;
   &:focus {
     outline: #9e9e9e;
-     border-radius: 20px 20px 0 0;
+    border-radius: 20px 20px 0 0;
   }
 `;
 
 export const Input = styled.input`
-   padding-left: 38px;
-   font-size: 14px;
-   width: 100%;
-   height: 32px;
-   color: #9e9e9e;
-   box-sizing: border-box;
-   border-radius: 20px;
-   border: 0.1rem solid #9e9e9e;
-   &:focus {
-     outline: #9e9e9e;
-     border-radius: 20px 20px 0 0;
-   }
- `;
+  padding-left: 38px;
+  font-size: 14px;
+  width: 100%;
+  height: 32px;
+  color: #9e9e9e;
+  box-sizing: border-box;
+  border-radius: 20px;
+  border: 0.1rem solid #9e9e9e;
+  &:focus {
+    outline: #9e9e9e;
+    border-radius: 20px 20px 0 0;
+  }
+`;
 
 export const InputIcon = styled.img`
   position: absolute;

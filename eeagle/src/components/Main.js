@@ -11,7 +11,13 @@ import {
   SearchForm,
 } from "../style/mainStyle.js";
 import { Button, NavBar } from "../style/style.js";
-import { getList, clear, history, historyUpdate } from "../redux-store/newsSlice"
+import LogoImage from "../img/Logo.svg";
+import {
+  getList,
+  clear,
+  history,
+  historyUpdate,
+} from "../redux-store/newsSlice";
 
 export default function Main() {
   const navigate = useNavigate();
@@ -26,18 +32,31 @@ export default function Main() {
     clearTimeout(timerId.current);
     timerId.current = setTimeout(() => {
       if (e.target.value) {
-        if(keywordList.some(keywordList => keywordList === e.target.value)) dispatch(historyUpdate(e.target.value))
-        else{
-          dispatch(history(e.target.value))
+        if (keywordList.some((keywordList) => keywordList === e.target.value))
+          dispatch(historyUpdate(e.target.value));
+        else {
+          dispatch(history(e.target.value));
         }
-        dispatch(clear())
-        dispatch(getList({value : e.target.value, page : 1}))
+        dispatch(clear());
+        dispatch(getList({ value: e.target.value, page: 1 }));
         navigate(`/search?q=${e.target.value}`);
       } else alert("검색어를 입력해주세요");
     }, 1500);
     setText(e.target.value);
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    clearTimeout(timerId.current);
+    if (keywordList.some((keywordList) => keywordList === text))
+      dispatch(historyUpdate(text));
+    else {
+      dispatch(history(text));
+    }
+    dispatch(clear());
+    dispatch(getList({ value: text, page: 1 }));
+    navigate(`/search?q=${text}`);
+  };
 
   return (
     <>
@@ -47,9 +66,9 @@ export default function Main() {
         </Link>
       </NavBar>
       <SearchContainer>
+        <Logo src={LogoImage}></Logo>
         <SearchForm>
-          <form>
-            <Logo>Eeagle</Logo>
+          <form onSubmit={onSubmit}>
             <HiOutlineSearch className="SearchIcon" />
             <Input
               value={text}
@@ -65,7 +84,9 @@ export default function Main() {
               {[...keywordList].reverse().map((history, i) => (
                 <List key={i}>
                   <HiOutlineSearch className="ListIcon" />
-                  {history}
+                  {history.length > 40
+                    ? `${history.substring(0, 40)}...`
+                    : history}
                 </List>
               ))}
             </Dropdown>
