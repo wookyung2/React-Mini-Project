@@ -10,15 +10,14 @@ export const SearchContainer = styled.div`
 
 export const SearchForm = styled.div`
   position: relative;
-  width: 57.2rem;
-  top: 5rem;
-
+  width: 40rem;
+  top: 3rem;
   .SearchIcon {
     position: absolute;
     top: 4.8rem;
     top: 50%;
     left: 1.6rem;
-    font-size: 1.7rem;
+    font-size: 1.2rem;
     z-index: 1;
     color: #9e9e9e;
     transform: translateY(-50%);
@@ -26,25 +25,25 @@ export const SearchForm = styled.div`
 `;
 
 export const Input = styled.input`
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   padding-left: 3.8rem;
   width: 100%;
-  height: 4rem;
+  height: 3rem;
   box-sizing: border-box;
-  border-radius: 2rem;
+  border-radius: 1.5rem;
   border: 0.1rem solid #9e9e9e;
   &:focus {
     outline: #9e9e9e;
-    border-radius: 2rem 2rem 0 0;
+    border-radius: 1.5rem 1.5rem 0 0;
   }
 `;
 
-export const Logo = styled.h1`
+export const Logo = styled.img`
   position: absolute;
-  font-size: 7rem;
+  width: 200px;
+  margin: 0 auto;
+  top: 250px;
   color: #3d3d3d;
-  bottom: 2rem;
-  left: 17rem;
 `;
 
 export const Dropdown = styled.ul`
@@ -53,7 +52,7 @@ export const Dropdown = styled.ul`
       ? `font-size: 1rem;
          font-weight: 400;
          top: 2rem`
-      : `font-size: 1.8rem;
+      : `font-size: 1.3rem;
          font-weight: null;
          top: null`};
   position: absolute;
@@ -74,7 +73,7 @@ export const Dropdown = styled.ul`
     position: absolute;
     top: 0.5rem;
     left: 1.6rem;
-    font-size: 1.7rem;
+    font-size: 1.2rem;
     z-index: 1;
     color: #9e9e9e;
   }
@@ -84,7 +83,7 @@ export const InputIcon = styled.img`
   position: absolute;
   left: 2.74%;
   right: 91.23%;
-  top: 14%;
+  top: 8%;
   bottom: 15.62%;
   height: 22px;
   width: 22px;
@@ -96,7 +95,8 @@ export const List = styled.li`
       ? `padding-left: 2.6rem;
          margin-top: 0.6rem`
       : `padding-left: 3.8rem;
-         margin-top: 1.5rem`};
+         margin-top: 0.8rem`};
   position: relative;
   list-style: none;
+  overflow: hidden;
 `;

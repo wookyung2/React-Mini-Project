@@ -9,7 +9,7 @@ import {
   InputIcon,
 } from "../style/style";
 import { Dropdown, List } from "../style/mainStyle.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import {
@@ -20,6 +20,7 @@ import {
 } from "../redux-store/newsSlice";
 
 const Nav = ({ showClip }) => {
+  const navigate = useNavigate();
   const keywordList = useSelector((state) => state.searchReducer.keywords);
   const [historyToggle, setHistoryToggle] = useState(false);
   const [text, setText] = useState(keywordList.at(-1));
@@ -39,6 +40,7 @@ const Nav = ({ showClip }) => {
     }
     dispatch(clear());
     dispatch(getList({ value: text, page: 1 }));
+    navigate(`/search?q=${text}`);
   };
 
   return (
@@ -67,7 +69,9 @@ const Nav = ({ showClip }) => {
             {[...keywordList].reverse().map((history, i) => (
               <List nav key={i}>
                 <InputIcon src={SearchBtn}></InputIcon>
-                {history}
+                {history.length > 35
+                  ? `${history.substring(0, 35)}...`
+                  : history}
               </List>
             ))}
           </Dropdown>
