@@ -11,6 +11,7 @@ import {
   SearchForm,
 } from "../style/mainStyle.js";
 import { Button, NavBar } from "../style/style.js";
+import LogoImage from "../img/Logo.svg";
 import {
   getList,
   clear,
@@ -46,7 +47,7 @@ export default function Main() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    navigate(`/search?q=${text}`);
+    clearTimeout(timerId.current);
     if (keywordList.some((keywordList) => keywordList === text))
       dispatch(historyUpdate(text));
     else {
@@ -54,6 +55,7 @@ export default function Main() {
     }
     dispatch(clear());
     dispatch(getList({ value: text, page: 1 }));
+    navigate(`/search?q=${text}`);
   };
 
   return (
@@ -64,9 +66,9 @@ export default function Main() {
         </Link>
       </NavBar>
       <SearchContainer>
+        <Logo src={LogoImage}></Logo>
         <SearchForm>
           <form onSubmit={onSubmit}>
-            <Logo>Eeagle</Logo>
             <HiOutlineSearch className="SearchIcon" />
             <Input
               value={text}
@@ -82,7 +84,9 @@ export default function Main() {
               {[...keywordList].reverse().map((history, i) => (
                 <List key={i}>
                   <HiOutlineSearch className="ListIcon" />
-                  {history}
+                  {history.length > 40
+                    ? `${history.substring(0, 40)}...`
+                    : history}
                 </List>
               ))}
             </Dropdown>

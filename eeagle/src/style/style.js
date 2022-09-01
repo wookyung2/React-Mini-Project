@@ -25,6 +25,7 @@ export const ATag = styled.a`
 export const ClipIcon = styled.img`
   height: 16px;
   margin: 0 13px;
+  cursor: pointer;
 `;
 export const Content = styled.div`
   font-size: 16px;
