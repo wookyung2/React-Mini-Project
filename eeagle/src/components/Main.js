@@ -66,9 +66,8 @@ export default function Main() {
         </Link>
       </NavBar>
       <SearchContainer>
-        <Logo src={LogoImage}></Logo>
-        <SearchForm>
-          <form onSubmit={onSubmit}>
+          <SearchForm onSubmit={onSubmit}>
+          <Logo src={LogoImage}></Logo>
             <HiOutlineSearch className="SearchIcon" />
             <Input
               value={text}
@@ -78,7 +77,6 @@ export default function Main() {
               onFocus={() => setHistoryToggle(!historyToggle)}
               onBlur={() => setHistoryToggle(!historyToggle)}
             />
-          </form>
           {historyToggle && (
             <Dropdown>
               {[...keywordList].reverse().map((history, i) => (
@@ -91,7 +89,7 @@ export default function Main() {
               ))}
             </Dropdown>
           )}
-        </SearchForm>
+          </SearchForm>
       </SearchContainer>
     </>
   );
