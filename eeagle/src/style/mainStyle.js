@@ -8,7 +8,7 @@ export const SearchContainer = styled.div`
   height: 100vh;
 `;
 
-export const SearchForm = styled.div`
+export const SearchForm = styled.form`
   position: relative;
   width: 40rem;
   top: 3rem;
@@ -41,8 +41,9 @@ export const Input = styled.input`
 export const Logo = styled.img`
   position: absolute;
   width: 200px;
-  margin: 0 auto;
-  top: 250px;
+  left:50%;
+  top: -6rem;
+  transform: translateX(-50%);
   color: #3d3d3d;
 `;
 
