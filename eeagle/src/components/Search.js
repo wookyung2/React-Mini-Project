@@ -11,7 +11,6 @@ function Search() {
   const dispatch = useDispatch()
   const [ref, inView] = useInView();
   const checkPage = useRef(1);
-
   const articleList = useSelector((state) => state.searchReducer.articles);
   const isLoading = useSelector((state) => state.searchReducer.isLoading);
 
@@ -25,9 +24,6 @@ function Search() {
         dispatch(getList({page : checkPage.current}));
       }
   },[inView]);
-
-
-
 
   return (
     <>

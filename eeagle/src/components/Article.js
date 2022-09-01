@@ -11,7 +11,6 @@ import unclipmark from "../img/unclipmark.svg";
 import { useDispatch,useSelector } from "react-redux";
 import { clip } from "../redux-store/newsSlice"
 
-
 const Article = ({ ele }) => {
   const dispatch = useDispatch();
   const clippedList = useSelector((state) => state.searchReducer.clipes);
