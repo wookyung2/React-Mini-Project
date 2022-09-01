@@ -1,10 +1,10 @@
 import axios from "axios";
+
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getList = createAsyncThunk("search/getList", async ({value,page}) => {
-    console.log(`page : ${page}`)
     const response = await axios
-    .get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${value}&page=${page}&sort=newest&api-key=QZ8zBBGvTq9MZzA36o2w9ktue4Kbi79u`)
+    .get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${value}&page=${page}&sort=newest&api-key=${process.env.REACT_APP_API_KEY}`)
     return response.data;
 });
 
