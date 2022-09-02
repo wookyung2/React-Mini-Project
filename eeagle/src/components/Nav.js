@@ -69,9 +69,7 @@ const Nav = ({ showClip }) => {
             {[...keywordList].reverse().map((history, i) => (
               <List nav key={i}>
                 <InputIcon src={SearchBtn}></InputIcon>
-                {history.length > 35
-                  ? `${history.substring(0, 35)}...`
-                  : history}
+                {history}
               </List>
             ))}
           </Dropdown>

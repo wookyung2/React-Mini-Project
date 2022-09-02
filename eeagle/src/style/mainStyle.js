@@ -90,4 +90,6 @@ export const List = styled.li`
   position: relative;
   list-style: none;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
