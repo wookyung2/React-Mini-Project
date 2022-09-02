@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -26,6 +26,11 @@ export default function Main() {
   const [historyToggle, setHistoryToggle] = useState(false);
   const timerId = useRef(null);
   const keywordList = useSelector((state) => state.keywords);
+  const page = useSelector((state) => state.page);
+
+  useEffect(() => {
+    dispatch(clear());
+  },[])
 
   //마지막 입력 후 1.5 초 동안 아무입력 없으면 페이지 이동한다.
   const onChange = (e) => {
@@ -34,7 +39,7 @@ export default function Main() {
       if (e.target.value) {
         dispatch(historyUpdate(e.target.value));
         dispatch(clear());
-        dispatch(getList({ value: e.target.value, page: 1 }));
+        dispatch(getList({ value: e.target.value, page: page }));
         navigate(`/search?q=${e.target.value}`);
       } else alert("검색어를 입력해주세요");
     }, 1500);
@@ -46,7 +51,7 @@ export default function Main() {
     clearTimeout(timerId.current);
     dispatch(historyUpdate(text));
     dispatch(clear());
-    dispatch(getList({ value: text, page: 1 }));
+    dispatch(getList({ value: text, page: page }));
     navigate(`/search?q=${text}`);
   };
 

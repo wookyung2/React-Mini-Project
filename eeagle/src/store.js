@@ -13,7 +13,7 @@ import {
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["keywords", "clipes", "articles"]
+  blacklist: ["isLoading"]
 }
 
 const persistedReducer = persistReducer(persistConfig, searchReducer.reducer);

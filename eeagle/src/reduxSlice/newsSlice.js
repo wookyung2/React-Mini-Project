@@ -15,6 +15,7 @@ const searchReducer = createSlice({
     clipes : [],
     articles: [],
     keywords : [],
+    page: 1,
   },
   reducers: {
     // clip 설정해주기
@@ -32,6 +33,7 @@ const searchReducer = createSlice({
     // keyword가 바뀌면 기존 article 초기화해주기
     clear : (state) => {
       state.articles =[]
+      state.page = 1;
     },
     // 똑같은 keywords가 input 되면 기존의 값 삭제해 주고, 새로 push 해주기
     historyUpdate : (state,action) => {
@@ -49,6 +51,7 @@ const searchReducer = createSlice({
       payload.response.docs.map((e) => {
           state.articles.push(e)
       })
+      state.page = state.page+1;
     },
     [getList.rejected]: (state, { payload }) => {
       state.isLoading = false
