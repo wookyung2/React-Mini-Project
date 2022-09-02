@@ -1,5 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit'
-import searchReducer from './redux-store/newsSlice'
+import searchReducer from './reduxSlice/newsSlice'
 import storage from "redux-persist/lib/storage"
 import {
   persistReducer,
@@ -15,8 +15,6 @@ const persistConfig = {
   storage,
   whitelist: ["keywords", "clipes", "articles"]
 }
-
-
 
 const persistedReducer = persistReducer(persistConfig, searchReducer.reducer);
 

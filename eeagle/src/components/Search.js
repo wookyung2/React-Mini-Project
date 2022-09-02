@@ -2,7 +2,7 @@ import Nav from "./Nav";
 import Article from "./Article";
 import React, { useRef,useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux";
-import { getList } from "../redux-store/newsSlice";
+import { getList } from "../reduxSlice/newsSlice";
 import { ListContanier } from "../style/style";
 import { useInView } from 'react-intersection-observer';
 import Loading from "../style/Loading";

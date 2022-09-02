@@ -9,7 +9,7 @@ import {
 import clipmark from "../img/clipmark.svg";
 import unclipmark from "../img/unclipmark.svg";
 import { useDispatch,useSelector } from "react-redux";
-import { clip } from "../redux-store/newsSlice"
+import { clip } from "../reduxSlice/newsSlice"
 
 const Article = ({ ele }) => {
   const dispatch = useDispatch();
