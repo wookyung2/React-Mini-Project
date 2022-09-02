@@ -21,7 +21,7 @@ import {
 
 const Nav = ({ showClip }) => {
   const navigate = useNavigate();
-  const keywordList = useSelector((state) => state.searchReducer.keywords);
+  const keywordList = useSelector((state) => state.keywords);
   const [historyToggle, setHistoryToggle] = useState(false);
   const [text, setText] = useState(keywordList.at(-1));
   const dispatch = useDispatch();

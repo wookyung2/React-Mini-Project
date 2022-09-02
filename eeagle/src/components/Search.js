@@ -11,8 +11,8 @@ function Search() {
   const dispatch = useDispatch()
   const [ref, inView] = useInView();
   const checkPage = useRef(1);
-  const articleList = useSelector((state) => state.searchReducer.articles);
-  const isLoading = useSelector((state) => state.searchReducer.isLoading);
+  const articleList = useSelector((state) => state.articles);
+  const isLoading = useSelector((state) => state.isLoading);
 
   // 새로운 키워드로 검색하면 checkPage.current 1로 초기화
   if(articleList.length < 10) checkPage.current = 1

@@ -52,7 +52,7 @@ const NotFound = () => {
 };
 
 function App() {
-  const history = useSelector((state) => state.searchReducer.keywords);
+  const history = useSelector((state) => state.keywords);
   return (
     <>
       <BrowserRouter>
