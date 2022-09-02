@@ -15,9 +15,8 @@ import LogoImage from "../img/Logo.svg";
 import {
   getList,
   clear,
-  history,
   historyUpdate,
-} from "../redux-store/newsSlice";
+} from "../reduxSlice/newsSlice";
 
 
 export default function Main() {
@@ -33,11 +32,7 @@ export default function Main() {
     clearTimeout(timerId.current);
     timerId.current = setTimeout(() => {
       if (e.target.value) {
-        if (keywordList.some((keywordList) => keywordList === e.target.value))
-          dispatch(historyUpdate(e.target.value));
-        else {
-          dispatch(history(e.target.value));
-        }
+        dispatch(historyUpdate(e.target.value));
         dispatch(clear());
         dispatch(getList({ value: e.target.value, page: 1 }));
         navigate(`/search?q=${e.target.value}`);
@@ -49,11 +44,7 @@ export default function Main() {
   const onSubmit = (e) => {
     e.preventDefault();
     clearTimeout(timerId.current);
-    if (keywordList.some((keywordList) => keywordList === text))
-      dispatch(historyUpdate(text));
-    else {
-      dispatch(history(text));
-    }
+    dispatch(historyUpdate(text));
     dispatch(clear());
     dispatch(getList({ value: text, page: 1 }));
     navigate(`/search?q=${text}`);

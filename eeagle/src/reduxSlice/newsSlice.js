@@ -33,19 +33,10 @@ const searchReducer = createSlice({
     clear : (state) => {
       state.articles =[]
     },
-    // keywords 동록
-    history : (state,action) => {
-      // 5개 이하이면 바로 push
-      if(state.keywords.length < 5) state.keywords.push(action.payload)
-      // 5개가 넘으면 첫 번째 값 제거하고 push
-      else {
-        state.keywords.shift()
-        state.keywords.push(action.payload)
-      }
-    },
     // 똑같은 keywords가 input 되면 기존의 값 삭제해 주고, 새로 push 해주기
     historyUpdate : (state,action) => {
       state.keywords = state.keywords.filter((element) => element !== action.payload)
+      if(state.keywords.length >= 5) state.keywords.shift();
       state.keywords.push(action.payload)
     }
   },

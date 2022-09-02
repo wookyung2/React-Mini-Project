@@ -15,9 +15,8 @@ import { useState } from "react";
 import {
   getList,
   clear,
-  history,
   historyUpdate,
-} from "../redux-store/newsSlice";
+} from "../reduxSlice/newsSlice";
 
 const Nav = ({ showClip }) => {
   const navigate = useNavigate();
@@ -31,13 +30,7 @@ const Nav = ({ showClip }) => {
   // 그 후 keywordUpdate, fetchArticle 순차적으로 실행
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // keywordList에 text가 존재하면
-    if (keywordList.some((keywordList) => keywordList === text))
-      dispatch(historyUpdate(text));
-    else {
-      dispatch(history(text));
-    }
+    dispatch(historyUpdate(text));
     dispatch(clear());
     dispatch(getList({ value: text, page: 1 }));
     navigate(`/search?q=${text}`);
