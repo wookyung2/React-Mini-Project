@@ -9,21 +9,16 @@ import {
   PERSIST,
   PURGE,
   REGISTER,} from "redux-persist"
-import {combineReducers} from 'redux'
-import logger from "redux-logger"
 
 const persistConfig = {
   key: "root",
-  version: "1.0",
   storage,
-  whiteList: ['news']
+  whitelist: ["keywords", "clipes", "articles"]
 }
 
-const reducer = combineReducers({
-  searchReducer: searchReducer.reducer
-});
 
-const persistedReducer = persistReducer(persistConfig, reducer);
+
+const persistedReducer = persistReducer(persistConfig, searchReducer.reducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
@@ -32,5 +27,5 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    },logger),
+    }),
 });

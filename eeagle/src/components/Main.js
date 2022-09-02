@@ -19,13 +19,14 @@ import {
   historyUpdate,
 } from "../redux-store/newsSlice";
 
+
 export default function Main() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   const [historyToggle, setHistoryToggle] = useState(false);
   const timerId = useRef(null);
-  const keywordList = useSelector((state) => state.searchReducer.keywords);
+  const keywordList = useSelector((state) => state.keywords);
 
   //마지막 입력 후 1.5 초 동안 아무입력 없으면 페이지 이동한다.
   const onChange = (e) => {
@@ -69,26 +70,26 @@ export default function Main() {
           <SearchForm onSubmit={onSubmit}>
           <Logo src={LogoImage}></Logo>
             <HiOutlineSearch className="SearchIcon" />
-            <Input
-              value={text}
-              type="text"
-              placeholder="Search.."
-              onChange={onChange}
-              onFocus={() => setHistoryToggle(!historyToggle)}
-              onBlur={() => setHistoryToggle(!historyToggle)}
-            />
-          {historyToggle && (
-            <Dropdown>
-              {[...keywordList].reverse().map((history, i) => (
-                <List key={i}>
-                  <HiOutlineSearch className="ListIcon" />
-                  {history.length > 40
-                    ? `${history.substring(0, 40)}...`
-                    : history}
-                </List>
-              ))}
-            </Dropdown>
-          )}
+              <Input
+                value={text}
+                type="text"
+                placeholder="Search.."
+                onChange={onChange}
+                onFocus={() => setHistoryToggle(!historyToggle)}
+                onBlur={() => setHistoryToggle(!historyToggle)}
+              />
+            {historyToggle && (
+              <Dropdown>
+                {[...keywordList].reverse().map((history, i) => (
+                  <List key={i}>
+                    <HiOutlineSearch className="ListIcon" />
+                    {history.length > 40
+                      ? `${history.substring(0, 40)}...`
+                      : history}
+                  </List>
+                ))}
+              </Dropdown>
+            )}
           </SearchForm>
       </SearchContainer>
     </>

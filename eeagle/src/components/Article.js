@@ -13,7 +13,7 @@ import { clip } from "../redux-store/newsSlice"
 
 const Article = ({ ele }) => {
   const dispatch = useDispatch();
-  const clippedList = useSelector((state) => state.searchReducer.clipes);
+  const clippedList = useSelector((state) => state.clipes);
 
   return (
         <ListDiv key={ele._id}>
