@@ -79,9 +79,7 @@ export default function Main() {
                 {[...keywordList].reverse().map((history, i) => (
                   <List key={i}>
                     <HiOutlineSearch className="ListIcon" />
-                    {history.length > 40
-                      ? `${history.substring(0, 40)}...`
-                      : history}
+                    {history}
                   </List>
                 ))}
               </Dropdown>
