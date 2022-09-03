@@ -8,7 +8,7 @@ export const SearchContainer = styled.div`
   height: 100vh;
 `;
 
-export const SearchForm = styled.div`
+export const SearchForm = styled.form`
   position: relative;
   width: 40rem;
   top: 3rem;
@@ -41,8 +41,9 @@ export const Input = styled.input`
 export const Logo = styled.img`
   position: absolute;
   width: 200px;
-  margin: 0 auto;
-  top: 250px;
+  left:50%;
+  top: -6rem;
+  transform: translateX(-50%);
   color: #3d3d3d;
 `;
 
@@ -77,16 +78,6 @@ export const Dropdown = styled.ul`
     z-index: 1;
     color: #9e9e9e;
   }
-`;
-
-export const InputIcon = styled.img`
-  position: absolute;
-  left: 2.74%;
-  right: 91.23%;
-  top: 8%;
-  bottom: 15.62%;
-  height: 22px;
-  width: 22px;
 `;
 
 export const List = styled.li`

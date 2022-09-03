@@ -2,8 +2,13 @@ import React from "react";
 import { ListDiv, Title, ATag, ClipIcon, Content } from "../style/style";
 import clipmark from "../img/clipmark.svg";
 import unclipmark from "../img/unclipmark.svg";
+<<<<<<< HEAD
 import { useDispatch, useSelector } from "react-redux";
 import { clip } from "../reduxSlice/newsSlice";
+=======
+import { useDispatch,useSelector } from "react-redux";
+import { clip } from "../reduxSlice/newsSlice"
+>>>>>>> 627ea77bbab9d502282650676b657c2dd3dc5baa
 
 const Article = ({ ele }) => {
   const dispatch = useDispatch();
