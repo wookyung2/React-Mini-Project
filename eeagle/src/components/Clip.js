@@ -5,7 +5,7 @@ import Article from "./Article";
 import { ListContanier } from "../style/style";
 
 const Clip = () => {
-  const clippedList = useSelector((state) => state.searchReducer.clipes);
+  const clippedList = useSelector((state) => state.clipes);
   
   return (
     <>

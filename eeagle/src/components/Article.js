@@ -9,11 +9,11 @@ import {
 import clipmark from "../img/clipmark.svg";
 import unclipmark from "../img/unclipmark.svg";
 import { useDispatch,useSelector } from "react-redux";
-import { clip } from "../redux-store/newsSlice"
+import { clip } from "../reduxSlice/newsSlice"
 
 const Article = ({ ele }) => {
   const dispatch = useDispatch();
-  const clippedList = useSelector((state) => state.searchReducer.clipes);
+  const clippedList = useSelector((state) => state.clipes);
 
   return (
         <ListDiv key={ele._id}>
