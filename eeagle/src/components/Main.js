@@ -58,8 +58,8 @@ export default function Main() {
         </Link>
       </NavBar>
       <SearchContainer>
-        <Logo src={LogoImage}></Logo>
         <SearchForm onSubmit={onSubmit}>
+          <Logo src={LogoImage}></Logo>
           <HiOutlineSearch className="SearchIcon" />
           <Input
             value={text}
