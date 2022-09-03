@@ -75,5 +75,4 @@ const Nav = ({ showClip }) => {
   );
 };
 
-
-export default Nav
+export default Nav;
