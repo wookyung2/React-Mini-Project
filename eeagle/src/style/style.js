@@ -59,21 +59,7 @@ export const InputDiv = styled.div`
   width: 365px;
   top: 28px;
   left: 220px;
-  &:focus {
-    outline: #9e9e9e;
-    border-radius: 20px 20px 0 0;
-  }
-`;
 
-export const Input = styled.input`
-  padding-left: 38px;
-  font-size: 14px;
-  width: 100%;
-  height: 32px;
-  color: #9e9e9e;
-  box-sizing: border-box;
-  border-radius: 20px;
-  border: 0.1rem solid #9e9e9e;
   &:focus {
     outline: #9e9e9e;
     border-radius: 20px 20px 0 0;

@@ -18,7 +18,6 @@ export default function Main() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [text, setText] = useState("");
-  const [historyToggle, setHistoryToggle] = useState(false);
   const timerId = useRef(null);
   const keywordList = useSelector((state) => state.keywords);
   const page = useSelector((state) => state.page);
@@ -66,19 +65,15 @@ export default function Main() {
             type="text"
             placeholder="Search.."
             onChange={onChange}
-            onFocus={() => setHistoryToggle(!historyToggle)}
-            onBlur={() => setHistoryToggle(!historyToggle)}
           />
-          {historyToggle && (
-            <Dropdown>
-              {[...keywordList].reverse().map((history, i) => (
-                <List key={i}>
-                  <HiOutlineSearch className="ListIcon" />
-                  {history}
-                </List>
-              ))}
-            </Dropdown>
-          )}
+          <Dropdown>
+            {[...keywordList].reverse().map((history, i) => (
+              <List key={i}>
+                <HiOutlineSearch className="ListIcon" />
+                {history}
+              </List>
+            ))}
+          </Dropdown>
         </SearchForm>
       </SearchContainer>
     </>

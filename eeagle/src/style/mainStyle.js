@@ -24,38 +24,17 @@ export const SearchForm = styled.form`
   }
 `;
 
-export const Input = styled.input`
-  font-size: 1.3rem;
-  padding-left: 3.8rem;
-  width: 100%;
-  height: 3rem;
-  box-sizing: border-box;
-  border-radius: 1.5rem;
-  border: 0.1rem solid #9e9e9e;
-  &:focus {
-    outline: #9e9e9e;
-    border-radius: 1.5rem 1.5rem 0 0;
-  }
-`;
-
 export const Logo = styled.img`
   position: absolute;
   width: 200px;
-  left:50%;
+  left: 50%;
   top: -6rem;
   transform: translateX(-50%);
   color: #3d3d3d;
 `;
 
 export const Dropdown = styled.ul`
-  ${(props) =>
-    props.nav
-      ? `font-size: 1rem;
-         font-weight: 400;
-         top: 2rem`
-      : `font-size: 1.3rem;
-         font-weight: null;
-         top: null`};
+  display: none;
   position: absolute;
 
   width: 100%;
@@ -70,6 +49,13 @@ export const Dropdown = styled.ul`
   background-color: white;
   color: #9e9e9e;
 
+  ${(props) =>
+    props.nav
+      ? `font-size: 1rem;
+         font-weight: 400;
+         top: 2rem`
+      : `font-size: 1.3rem;`};
+
   .ListIcon {
     position: absolute;
     top: 0.5rem;
@@ -77,6 +63,33 @@ export const Dropdown = styled.ul`
     font-size: 1.2rem;
     z-index: 1;
     color: #9e9e9e;
+  }
+`;
+
+export const Input = styled.input`
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 1.5rem;
+  border: 0.1rem solid #9e9e9e;
+
+  ${(props) =>
+    props.nav
+      ? `
+  padding-left: 38px;
+  font-size: 14px;
+  height: 32px;
+  `
+      : `font-size: 1.3rem;
+  padding-left: 3.8rem;
+  height: 3rem;`}
+
+  &:focus {
+    outline: #9e9e9e;
+    border-radius: 1.5rem 1.5rem 0 0;
+
+    & + ${Dropdown} {
+      display: block;
+    }
   }
 `;
 

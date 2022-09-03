@@ -1,27 +1,15 @@
 import LogoImage from "../img/Logo.svg";
 import SearchBtn from "../img/Search_btn.svg";
-import {
-  Input,
-  NavBar,
-  Logo,
-  InputDiv,
-  Button,
-  InputIcon,
-} from "../style/style";
-import { Dropdown, List } from "../style/mainStyle.js";
+import { NavBar, Logo, InputDiv, Button, InputIcon } from "../style/style";
+import { Dropdown, List, Input } from "../style/mainStyle.js";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import {
-  getList,
-  clear,
-  historyUpdate,
-} from "../reduxSlice/newsSlice";
+import { getList, clear, historyUpdate } from "../reduxSlice/newsSlice";
 
 const Nav = ({ showClip }) => {
   const navigate = useNavigate();
   const keywordList = useSelector((state) => state.keywords);
-  const [historyToggle, setHistoryToggle] = useState(false);
   const [text, setText] = useState(keywordList.at(-1));
   const dispatch = useDispatch();
 
@@ -47,26 +35,23 @@ const Nav = ({ showClip }) => {
             <>
               <InputIcon src={SearchBtn}></InputIcon>
               <Input
+                nav
                 value={text}
                 type="text"
                 placeholder="Search..."
                 onChange={(e) => setText(e.target.value)}
-                onFocus={() => setHistoryToggle(!historyToggle)}
-                onBlur={() => setHistoryToggle(!historyToggle)}
               />
+              <Dropdown nav>
+                {[...keywordList].reverse().map((history, i) => (
+                  <List nav key={i}>
+                    <InputIcon src={SearchBtn}></InputIcon>
+                    {history}
+                  </List>
+                ))}
+              </Dropdown>
             </>
           )}
         </form>
-        {historyToggle && (
-          <Dropdown nav>
-            {[...keywordList].reverse().map((history, i) => (
-              <List nav key={i}>
-                <InputIcon src={SearchBtn}></InputIcon>
-                {history}
-              </List>
-            ))}
-          </Dropdown>
-        )}
       </InputDiv>
       <Link to={showClip ? `/search?q=${keywordList.at(-1)}` : "/clip"}>
         <Button type="button">{showClip ? "Show All" : "Show Clip"}</Button>
