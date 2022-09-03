@@ -15,6 +15,7 @@ const searchReducer = createSlice({
     clipes : [],
     articles: [],
     keywords : [],
+    page: 1,
   },
   reducers: {
     // clip 설정해주기
@@ -32,20 +33,12 @@ const searchReducer = createSlice({
     // keyword가 바뀌면 기존 article 초기화해주기
     clear : (state) => {
       state.articles =[]
-    },
-    // keywords 동록
-    history : (state,action) => {
-      // 5개 이하이면 바로 push
-      if(state.keywords.length < 5) state.keywords.push(action.payload)
-      // 5개가 넘으면 첫 번째 값 제거하고 push
-      else {
-        state.keywords.shift()
-        state.keywords.push(action.payload)
-      }
+      state.page = 1;
     },
     // 똑같은 keywords가 input 되면 기존의 값 삭제해 주고, 새로 push 해주기
     historyUpdate : (state,action) => {
       state.keywords = state.keywords.filter((element) => element !== action.payload)
+      if(state.keywords.length >= 5) state.keywords.shift();
       state.keywords.push(action.payload)
     }
   },
@@ -58,6 +51,7 @@ const searchReducer = createSlice({
       payload.response.docs.map((e) => {
           state.articles.push(e)
       })
+      state.page = state.page+1;
     },
     [getList.rejected]: (state, { payload }) => {
       state.isLoading = false
