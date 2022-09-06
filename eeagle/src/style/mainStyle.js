@@ -14,7 +14,6 @@ export const SearchForm = styled.form`
   top: 3rem;
   .SearchIcon {
     position: absolute;
-    top: 4.8rem;
     top: 50%;
     left: 1.6rem;
     font-size: 1.2rem;
@@ -54,11 +53,11 @@ export const Dropdown = styled.ul`
       ? `font-size: 1rem;
          font-weight: 400;
          top: 2rem`
-      : `font-size: 1.3rem;`};
+      : `font-size: 1.3rem`};
 
   .ListIcon {
     position: absolute;
-    top: 0.5rem;
+    top: 0.35rem;
     left: 1.6rem;
     font-size: 1.2rem;
     z-index: 1;
